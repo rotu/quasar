@@ -120,7 +120,7 @@ const builds = [
         input: resolve('src/index.ssr.js')
       },
       output: {
-        file: resolve('dist/quasar.ssr-server.esm.prod.js'),
+        file: resolve('dist/quasar.ssr-server.esm.js'),
         format: 'es'
       }
     },
