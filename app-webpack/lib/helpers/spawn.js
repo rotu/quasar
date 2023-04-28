@@ -11,10 +11,10 @@ export function spawn (cmd, params, opts, onClose) {
   }
 
   const targetFolder = opts && opts.cwd
-    ? ` in ${opts.cwd}`
+    ? ` in ${ opts.cwd }`
     : ''
 
-  log(`Running "${cmd} ${params.join(' ')}"${targetFolder}`)
+  log(`Running "${ cmd } ${ params.join(' ') }"${ targetFolder }`)
   log()
 
   const runner = crossSpawn(
@@ -26,7 +26,7 @@ export function spawn (cmd, params, opts, onClose) {
   runner.on('close', code => {
     log()
     if (code) {
-      log(`Command "${cmd}" failed with exit code: ${code}`)
+      log(`Command "${ cmd }" failed with exit code: ${ code }`)
     }
 
     onClose && onClose(code)
@@ -44,10 +44,10 @@ export function spawn (cmd, params, opts, onClose) {
  */
 export function spawnSync (cmd, params, opts, onFail) {
   const targetFolder = opts && opts.cwd
-    ? ` in ${opts.cwd}`
+    ? ` in ${ opts.cwd }`
     : ''
 
-  log(`[sync] Running "${cmd} ${params.join(' ')}"${targetFolder}`)
+  log(`[sync] Running "${ cmd } ${ params.join(' ') }"${ targetFolder }`)
   log()
 
   const runner = crossSpawn.sync(
@@ -58,9 +58,9 @@ export function spawnSync (cmd, params, opts, onFail) {
 
   if (runner.status || runner.error) {
     warn()
-    warn(`Command "${cmd}" failed with exit code: ${runner.status}`)
+    warn(`Command "${ cmd }" failed with exit code: ${ runner.status }`)
     if (runner.status === null) {
-      warn(`Please globally install "${cmd}"`)
+      warn(`Please globally install "${ cmd }"`)
     }
     onFail && onFail()
     process.exit(1)

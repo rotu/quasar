@@ -20,13 +20,13 @@ export function getFixedDeps (deps) {
 
   const appDeps = { ...deps }
 
-  Object.entries(deps).forEach(([name, versionRange]) => {
+  Object.entries(deps).forEach(([ name, versionRange ]) => {
     if (urlRangePattern.test(versionRange)) {
       return
     }
 
     const pkg = getPackageJson(name)
-    appDeps[name] = pkg !== void 0 ? pkg.version : versionRange
+    appDeps[ name ] = pkg !== void 0 ? pkg.version : versionRange
   })
 
   return appDeps

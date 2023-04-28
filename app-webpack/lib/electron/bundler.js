@@ -11,13 +11,13 @@ const versions = {
 }
 
 function isValidName (bundlerName) {
-  return ['packager', 'builder'].includes(bundlerName)
+  return [ 'packager', 'builder' ].includes(bundlerName)
 }
 
 function installBundler (bundlerName) {
   nodePackager.installPackage(
-    `electron-${bundlerName}@^${versions[bundlerName]}`,
-    { isDev: true, displayName: `electron-${bundlerName}` }
+    `electron-${ bundlerName }@^${ versions[ bundlerName ] }`,
+    { isDev: true, displayName: `electron-${ bundlerName }` }
   )
 }
 
@@ -26,10 +26,10 @@ export function bundlerIsInstalled (bundlerName) {
     readFileSync(appPaths.resolve.app('package.json'), 'utf-8')
   )
 
-  const pgkName = `electron-${bundlerName}`
+  const pgkName = `electron-${ bundlerName }`
   return (
-    (appPkg.devDependencies && appPkg.devDependencies[pgkName])
-    || (appPkg.dependencies && appPkg.dependencies[pgkName])
+    (appPkg.devDependencies && appPkg.devDependencies[ pgkName ])
+    || (appPkg.dependencies && appPkg.dependencies[ pgkName ])
   ) !== void 0
 }
 

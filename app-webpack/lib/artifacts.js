@@ -29,7 +29,7 @@ export function add (entry) {
   if (!content.folders.includes(entry)) {
     content.folders.push(entry)
     save(content)
-    log(`Added build artifact "${entry}"`)
+    log(`Added build artifact "${ entry }"`)
   }
 }
 
@@ -48,7 +48,7 @@ export function clean (folder) {
     fse.removeSync(folder)
   }
 
-  log(`Cleaned build artifact: "${folder}"`)
+  log(`Cleaned build artifact: "${ folder }"`)
 }
 
 export function cleanAll () {
@@ -60,12 +60,12 @@ export function cleanAll () {
       fse.removeSync(folder)
     }
 
-    log(`Cleaned build artifact: "${folder}"`)
+    log(`Cleaned build artifact: "${ folder }"`)
   })
 
-  let folder = appPaths.resolve.app('.quasar')
+  const folder = appPaths.resolve.app('.quasar')
   fse.removeSync(folder)
-  log(`Cleaned build artifact: "${folder}"`)
+  log(`Cleaned build artifact: "${ folder }"`)
 
   const distFolder = appPaths.resolve.app('dist')
 

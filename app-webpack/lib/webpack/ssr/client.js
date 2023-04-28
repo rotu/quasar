@@ -28,8 +28,8 @@ export function injectSSRClient (chain, cfg) {
 
   if (cfg.ctx.prod) {
     chain.plugin('quasar-ssr-client')
-      .use(QuasarSSRClientPlugin, [{
+      .use(QuasarSSRClientPlugin, [ {
         filename: '../quasar.client-manifest.json'
-      }])
+      } ])
   }
 }

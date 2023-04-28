@@ -18,7 +18,7 @@ class PackageManager {
   isUsed () {
     let directory = process.cwd()
 
-    while (directory.length && directory[directory.length - 1] !== sep) {
+    while (directory.length && directory[ directory.length - 1 ] !== sep) {
       if (fs.existsSync(join(directory, this.lockFile))) {
         return true
       }
@@ -32,7 +32,7 @@ class PackageManager {
   isInstalled () {
     try {
       // spawnSync helper would log stuff and exit the app on error, so we don't use it here
-      return spawn(this.name, ['--version']).status === 0
+      return spawn(this.name, [ '--version' ]).status === 0
     }
     catch (err) {
       return false
@@ -42,10 +42,10 @@ class PackageManager {
   install ({ cwd, displayName } = {}) {
     displayName = displayName ? displayName + ' ' : ''
 
-    log(`Installing ${displayName}dependencies...`)
-    this.__run(['install'], {
+    log(`Installing ${ displayName }dependencies...`)
+    this.__run([ 'install' ], {
       cwd,
-      onFail: () => fatal(`Failed to install ${displayName}dependencies`, 'FAIL')
+      onFail: () => fatal(`Failed to install ${ displayName }dependencies`, 'FAIL')
     })
   }
 
@@ -54,12 +54,12 @@ class PackageManager {
   }
 
   installPackage (name, { cwd, displayName = name, isDev = false } = {}) {
-    const params = this.getInstallPackageParams(Array.isArray(name) ? name : [name], isDev)
+    const params = this.getInstallPackageParams(Array.isArray(name) ? name : [ name ], isDev)
 
-    log(`Installing ${displayName}...`)
+    log(`Installing ${ displayName }...`)
     this.__run(params, {
       cwd,
-      onFail: () => fatal(`Failed to install ${displayName}`, 'FAIL')
+      onFail: () => fatal(`Failed to install ${ displayName }`, 'FAIL')
     })
   }
 
@@ -68,12 +68,12 @@ class PackageManager {
   }
 
   uninstallPackage (name, { cwd, displayName = name } = {}) {
-    const params = this.getUninstallPackageParams(Array.isArray(name) ? name : [name])
+    const params = this.getUninstallPackageParams(Array.isArray(name) ? name : [ name ])
 
-    log(`Uninstalling ${displayName}...`)
+    log(`Uninstalling ${ displayName }...`)
     this.__run(params, {
       cwd,
-      onFail: () => fatal(`Failed to uninstall ${displayName}`, 'FAIL')
+      onFail: () => fatal(`Failed to uninstall ${ displayName }`, 'FAIL')
     })
   }
 
@@ -100,7 +100,7 @@ class Npm extends PackageManager {
   }
 
   getUninstallPackageParams(names) {
-    return ['uninstall', ...names]
+    return [ 'uninstall', ...names ]
   }
 }
 
@@ -117,7 +117,7 @@ class Yarn extends PackageManager {
   }
 
   getUninstallPackageParams(names) {
-    return ['remove', ...names]
+    return [ 'remove', ...names ]
   }
 }
 
@@ -134,7 +134,7 @@ class Pnpm extends PackageManager {
   }
 
   getUninstallPackageParams (names) {
-    return ['remove', ...names]
+    return [ 'remove', ...names ]
   }
 }
 

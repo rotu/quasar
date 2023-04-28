@@ -3,7 +3,7 @@ import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import appPaths from '../app-paths.js'
 
 export function fixAndroidCleartext (mode) {
-  const androidManifestPath = appPaths.resolve[mode](
+  const androidManifestPath = appPaths.resolve[ mode ](
     mode === 'cordova'
       ? 'platforms/android/app/src/main/AndroidManifest.xml'
       : 'android/app/src/main/AndroidManifest.xml'

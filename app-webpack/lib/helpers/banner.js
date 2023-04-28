@@ -25,34 +25,34 @@ function displayBanner (argv, cmd, details) {
   let banner = ''
 
   if (details) {
-    banner += ` ${underline('Build succeeded')}\n`
+    banner += ` ${ underline('Build succeeded') }\n`
   }
 
   banner += `
- ${cmd === 'dev' ? 'Dev mode..................' : 'Build mode................'} ${green(argv.mode)}
- Pkg quasar................ ${green('v' + quasarVersion)}
- Pkg @quasar/app-webpack... ${green('v' + cliAppVersion)}
- Pkg webpack............... ${green('v5')}
- Debugging................. ${cmd === 'dev' || argv.debug ? green('enabled') : gray('no')}`
+ ${ cmd === 'dev' ? 'Dev mode..................' : 'Build mode................' } ${ green(argv.mode) }
+ Pkg quasar................ ${ green('v' + quasarVersion) }
+ Pkg @quasar/app-webpack... ${ green('v' + cliAppVersion) }
+ Pkg webpack............... ${ green('v5') }
+ Debugging................. ${ cmd === 'dev' || argv.debug ? green('enabled') : gray('no') }`
 
   if (cmd === 'build') {
-    banner += `\n Publishing................ ${argv.publish !== void 0 ? green('yes') : gray('no')}`
+    banner += `\n Publishing................ ${ argv.publish !== void 0 ? green('yes') : gray('no') }`
   }
 
-  if (['cordova', 'capacitor'].includes(argv.mode)) {
-    const packaging = argv['skip-pkg']
+  if ([ 'cordova', 'capacitor' ].includes(argv.mode)) {
+    const packaging = argv[ 'skip-pkg' ]
       ? gray('skip')
       : green(getPackager(argv, cmd))
 
-    banner += `\n ${cmd === 'build' ? 'Packaging' : 'Running'} mode............${cmd === 'build' ? '' : '..'} ${packaging}`
+    banner += `\n ${ cmd === 'build' ? 'Packaging' : 'Running' } mode............${ cmd === 'build' ? '' : '..' } ${ packaging }`
   }
 
   if (details) {
-    banner += `\n Transpiled JS..... ${details.transpileBanner}`
-    if (argv['skip-pkg'] !== true) {
+    banner += `\n Transpiled JS..... ${ details.transpileBanner }`
+    if (argv[ 'skip-pkg' ] !== true) {
       banner += `
  ==========================
- Output folder............. ${green(details.outputFolder)}`
+ Output folder............. ${ green(details.outputFolder) }`
     }
 
     if (argv.mode === 'ssr') {
@@ -90,7 +90,7 @@ function displayBanner (argv, cmd, details) {
       "npx capacitor <params>") or change any files in "src-capacitor", except
       for the "www" folder which must be built by Quasar CLI.`
     }
-    else if (['spa', 'pwa'].includes(argv.mode)) {
+    else if ([ 'spa', 'pwa' ].includes(argv.mode)) {
       banner += `
 
  Tip: Built files are meant to be served over an HTTP server

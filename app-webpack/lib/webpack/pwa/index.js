@@ -67,7 +67,7 @@ export function injectPwa (chain, cfg) {
         ? cfg.build.ssrPwaHtmlFilename
         : cfg.build.htmlFilename
 
-      opts.navigateFallback = `${cfg.build.publicPath}${htmlFile}`
+      opts.navigateFallback = `${ cfg.build.publicPath }${ htmlFile }`
       opts.navigateFallbackDenylist = opts.navigateFallbackDenylist || []
       opts.navigateFallbackDenylist.push(/service-worker\.js$/, /workbox-(.)*\.js$/)
     }
@@ -76,7 +76,7 @@ export function injectPwa (chain, cfg) {
   opts.swDest = 'service-worker.js'
 
   chain.plugin('workbox')
-    .use(WorkboxPlugin[pluginMode], [ opts ])
+    .use(WorkboxPlugin[ pluginMode ], [ opts ])
 
   chain.plugin('html-pwa')
     .use(HtmlPwaPlugin, [ cfg ])

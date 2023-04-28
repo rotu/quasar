@@ -26,7 +26,7 @@ export async function regenerateTypesFeatureFlags (quasarConf) {
     'store',
     'bex'
   ]) {
-    const [isFeatureInstalled, sourceFlagPath, destFlagPath] = feature === 'store'
+    const [ isFeatureInstalled, sourceFlagPath, destFlagPath ] = feature === 'store'
       ? [
         quasarConf.store,
         appPaths.resolve.cli('templates/store/store-flag.d.ts'),
@@ -34,13 +34,13 @@ export async function regenerateTypesFeatureFlags (quasarConf) {
       ]
       : [
         (await getMode(feature)).isInstalled,
-        appPaths.resolve.cli(`templates/${feature}/${feature}-flag.d.ts`),
-        appPaths.resolve[feature](`${feature}-flag.d.ts`)
+        appPaths.resolve.cli(`templates/${ feature }/${ feature }-flag.d.ts`),
+        appPaths.resolve[ feature ](`${ feature }-flag.d.ts`)
       ]
 
     if (isFeatureInstalled && !fs.existsSync(destFlagPath)) {
       fse.copySync(sourceFlagPath, destFlagPath)
-      log(`'${feature}' feature flag was missing and has been regenerated`)
+      log(`'${ feature }' feature flag was missing and has been regenerated`)
     }
   }
 }

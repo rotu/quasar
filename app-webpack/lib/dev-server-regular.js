@@ -34,7 +34,7 @@ export class DevServer {
         if (openedBrowser === false) {
           openedBrowser = true
 
-          if (cfg.__devServer.open && ['spa', 'pwa'].includes(cfg.ctx.modeName)) {
+          if (cfg.__devServer.open && [ 'spa', 'pwa' ].includes(cfg.ctx.modeName)) {
             openBrowser({ url: cfg.build.APP_URL, opts: cfg.__devServer.openOptions })
           }
         }

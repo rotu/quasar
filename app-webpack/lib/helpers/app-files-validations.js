@@ -5,12 +5,10 @@ import { warn } from './logger.js'
 import appPaths from '../app-paths.js'
 
 export function appFilesValidations (cfg) {
-  let file
-  let content
   let error = false
 
-  file = appPaths.resolve.app(cfg.sourceFiles.indexHtmlTemplate)
-  content = readFileSync(file, 'utf-8')
+  const file = appPaths.resolve.app(cfg.sourceFiles.indexHtmlTemplate)
+  const content = readFileSync(file, 'utf-8')
 
   if (content.indexOf('<base href') > -1) {
     warn(`Please remove the <base> tag from /src/index.template.html

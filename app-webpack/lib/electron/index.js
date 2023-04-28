@@ -105,7 +105,7 @@ class ElectronRunner {
         { cwd: cfg.build.distDir },
         code => {
           if (code) {
-            fatal(`${nodePackager.name} failed installing dependencies`, 'FAIL')
+            fatal(`${ nodePackager.name } failed installing dependencies`, 'FAIL')
           }
           resolve()
         }
@@ -136,12 +136,12 @@ class ElectronRunner {
       })
     }).then(async () => {
       const bundlerName = cfg.electron.bundler
-      const bundlerConfig = cfg.electron[bundlerName]
-      const pkgName = `electron-${bundlerName}`
+      const bundlerConfig = cfg.electron[ bundlerName ]
+      const pkgName = `electron-${ bundlerName }`
       const { default: bundler } = await getPackage(pkgName)
 
       return new Promise((resolve, reject) => {
-        log(`Bundling app with electron-${bundlerName}...`)
+        log(`Bundling app with electron-${ bundlerName }...`)
         log()
 
         const bundlePromise = bundlerName === 'packager'
@@ -154,13 +154,13 @@ class ElectronRunner {
         bundlePromise
           .then(() => {
             log()
-            success(`${pkgName} built the app`, 'SUCCESS')
+            success(`${ pkgName } built the app`, 'SUCCESS')
             log()
             resolve()
           })
           .catch(err => {
             log()
-            warn(`${pkgName} could not build`, 'FAIL')
+            warn(`${ pkgName } could not build`, 'FAIL')
             log()
             console.error(err + '\n')
             reject()
@@ -174,7 +174,7 @@ class ElectronRunner {
 
     this.__stopElectron()
 
-    ;[ this.mainWatcher, this.preloadWatcher]
+    ;[ this.mainWatcher, this.preloadWatcher ]
       .forEach(w => {
         if (w) {
           w.close()
@@ -209,7 +209,7 @@ class ElectronRunner {
         }
         else if (code) {
           warn()
-          fatal(`Electron process ended with error code: ${code}`)
+          fatal(`Electron process ended with error code: ${ code }`)
         }
         else { // else it wasn't killed by us
           warn()

@@ -16,7 +16,7 @@
     "tsconfig-preset.json"
   ],
   "scripts": {
-    "lint": "eslint --ext .js ./ ./bin/quasar --fix --report-unused-disable-directives"
+    "lint": "eslint --ext .js ./ --fix --report-unused-disable-directives"
   },
   "keywords": [
     "quasar",
@@ -47,9 +47,9 @@
     "url": "https://donate.quasar.dev"
   },
   "dependencies": {
-    "@quasar/babel-preset-app": "/Users/razvan/work/@quasar-v2/utils/babel-preset-app",
+    "@quasar/babel-preset-app": "/Users/razvan/work/v3/utils/babel-preset-app",
     "@quasar/fastclick": "1.1.5",
-    "@quasar/ssr-helpers": "/Users/razvan/work/@quasar-v2/utils/ssr-helpers",
+    "@quasar/ssr-helpers": "/Users/razvan/work/v3/utils/ssr-helpers",
     "@types/chrome": "^0.0.209",
     "@types/compression": "^1.7.2",
     "@types/cordova": "11.0.0",

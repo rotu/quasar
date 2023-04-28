@@ -1,5 +1,5 @@
 
-import { readFileSync} from 'node:fs'
+import { readFileSync } from 'node:fs'
 
 import appPaths from '../app-paths.js'
 import { getPackagePath } from './get-package-path.js'

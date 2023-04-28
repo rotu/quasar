@@ -36,7 +36,7 @@ export async function injectElectronMain (cfg, configName) {
 
     const { default: CopyWebpackPlugin } = await import('copy-webpack-plugin')
     chain.plugin('copy-webpack')
-      .use(CopyWebpackPlugin, [{ patterns }])
+      .use(CopyWebpackPlugin, [ { patterns } ])
   }
 
   return chain

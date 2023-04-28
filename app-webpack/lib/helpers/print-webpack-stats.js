@@ -38,7 +38,7 @@ function getAssets (stats) {
 
       if (match !== null) {
         assets.push({
-          type: match[1],
+          type: match[ 1 ],
           name,
           size
         })
@@ -56,7 +56,7 @@ function getAssets (stats) {
 }
 
 function getHumanSize (bytes) {
-  return `${(bytes / 1024).toFixed(2)} KB`
+  return `${ (bytes / 1024).toFixed(2) } KB`
 }
 
 function getGzippedSize (asset, outputFolder) {
@@ -73,7 +73,7 @@ function getGzippedSize (asset, outputFolder) {
 
 function getTableLines (assets, outputFolder) {
   return assets.map(asset => {
-    const color = colorFn[asset.type]
+    const color = colorFn[ asset.type ]
 
     return [
       color(basename(asset.name)),
@@ -122,11 +122,11 @@ export function printWebpackStats (stats, outputFolder, name) {
     drawHorizontalLine: index => tableIndexDelimiters.includes(index)
   })
 
-  console.log(` Summary for "${bold(green(name))}" (only css/js/json)`)
+  console.log(` Summary for "${ bold(green(name)) }" (only css/js/json)`)
   console.log(' ' + output.replace(/\n/g, '\n '))
 
   if (stats.hasWarnings()) {
     const summary = printWebpackWarnings(name, stats)
-    warn(`Build succeeded, but with ${summary}. Check log above.\n`)
+    warn(`Build succeeded, but with ${ summary }. Check log above.\n`)
   }
 }

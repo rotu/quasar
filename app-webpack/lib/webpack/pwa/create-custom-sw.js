@@ -6,7 +6,7 @@ import WebpackChain from 'webpack-chain'
 import appPaths from '../../app-paths.js'
 import { parseBuildEnv } from '../../helpers/parse-build-env.js'
 import { WebpackProgressPlugin } from '../plugin.progress.js'
-import { getPackage } from '../helpers/get-package.js'
+import { getPackage } from '../../helpers/get-package.js'
 
 const { default: importTransformation } = await getPackage('quasar/dist/transforms/import-transformation.js')
 
@@ -86,9 +86,9 @@ export function createCustomSw (cfg, configName) {
       .exclude
         .add(filepath => (
           // Transpile the exceptions:
-          exceptionsRegex.test(filepath) === false &&
+          exceptionsRegex.test(filepath) === false
           // Don't transpile anything else in node_modules:
-          nodeModulesRegex.test(filepath)
+          && nodeModulesRegex.test(filepath)
         ))
         .end()
       .use('babel-loader')
@@ -140,7 +140,7 @@ export function createCustomSw (cfg, configName) {
     .maxAssetSize(500000)
 
   chain.plugin('progress')
-    .use(WebpackProgressPlugin, [{ name: configName, cfg }])
+    .use(WebpackProgressPlugin, [ { name: configName, cfg } ])
 
   return chain
 }

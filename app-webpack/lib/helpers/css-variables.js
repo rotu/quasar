@@ -10,7 +10,7 @@ const appFile = {
 
 const quasarSrcExt = (() => {
   for (const ext of Object.keys(appFile)) {
-    if (appFile[ext]) {
+    if (appFile[ ext ]) {
       return ext === 'scss' ? 'sass' : ext
     }
   }
@@ -28,7 +28,7 @@ export const cssVariables = {
         : (appFile.sass ? 'sass' : false)
 
       return ext !== false
-        ? `@import '~src/css/quasar.variables.${ext}', 'quasar/src/css/variables.sass';\n`
+        ? `@import '~src/css/quasar.variables.${ ext }', 'quasar/src/css/variables.sass';\n`
         : `@import 'quasar/src/css/variables.sass';\n`
     })(),
 
@@ -38,7 +38,7 @@ export const cssVariables = {
         : (appFile.scss ? 'scss' : false)
 
       return ext !== false
-        ? `@import '~src/css/quasar.variables.${ext}', 'quasar/src/css/variables.sass'\n`
+        ? `@import '~src/css/quasar.variables.${ ext }', 'quasar/src/css/variables.sass'\n`
         : `@import 'quasar/src/css/variables.sass'\n`
     })()
   }

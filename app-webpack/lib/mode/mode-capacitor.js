@@ -27,8 +27,8 @@ export class Mode {
 
     if (/^[0-9]/.test(appName)) {
       warn(
-        `App product name cannot start with a number. ` +
-        `Please change the "productName" prop in your /package.json then try again.`
+        `App product name cannot start with a number. `
+        + `Please change the "productName" prop in your /package.json then try again.`
       )
       return
     }
@@ -36,13 +36,13 @@ export class Mode {
     const { default: inquirer } = await import('inquirer')
 
     console.log()
-    const answer = await inquirer.prompt([{
+    const answer = await inquirer.prompt([ {
       name: 'appId',
       type: 'input',
       message: 'What is the Capacitor app id?',
       default: 'org.capacitor.quasar.app',
-      validate: appId => appId ? true : 'Please fill in a value'
-    }])
+      validate: appId => (appId ? true : 'Please fill in a value')
+    } ])
 
     log(`Creating Capacitor source folder...`)
 
@@ -57,7 +57,7 @@ export class Mode {
       nodePackager
     }
 
-    fglob.sync(['**/*'], {
+    fglob.sync([ '**/*' ], {
       cwd: appPaths.resolve.cli('templates/capacitor')
     }).forEach(filePath => {
       const dest = appPaths.resolve.capacitor(filePath)
@@ -110,15 +110,15 @@ export class Mode {
 
     if (capVersion >= 3) {
       nodePackager.installPackage(
-        `@capacitor/${target}@^${capVersion}.0.0-beta.0`,
+        `@capacitor/${ target }@^${ capVersion }.0.0-beta.0`,
         { displayName: 'Capacitor platform', cwd: appPaths.capacitorDir }
       )
     }
 
-    log(`Adding Capacitor platform "${target}"`)
+    log(`Adding Capacitor platform "${ target }"`)
     spawnSync(
       capBin,
-      ['add', target],
+      [ 'add', target ],
       { cwd: appPaths.capacitorDir }
     )
   }

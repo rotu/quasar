@@ -73,10 +73,10 @@ async function injectRule (chain, pref, lang, test, loader, loaderOptions) {
       sourceMap: pref.sourceMap,
       url: { filter: shouldRequireUrl },
       importLoaders:
-        1 + // stylePostLoader injected by vue-loader
-        1 + // postCSS loader
-        (!pref.extract && pref.minify ? 1 : 0) + // postCSS with cssnano
-        (loader ? (loader === 'sass-loader' ? 2 : 1) : 0)
+        1 // stylePostLoader injected by vue-loader
+        + 1 // postCSS loader
+        + (!pref.extract && pref.minify ? 1 : 0) // postCSS with cssnano
+        + (loader ? (loader === 'sass-loader' ? 2 : 1) : 0)
     }
 
     if (modules) {
@@ -125,8 +125,8 @@ async function injectRule (chain, pref, lang, test, loader, loaderOptions) {
       const postcssRTLOptions = pref.rtl === true ? {} : pref.rtl
 
       if (
-        typeof postCssConfig.plugins !== 'function' &&
-        (postcssRTLOptions.source === 'ltr' || typeof postcssRTLOptions === 'function')
+        typeof postCssConfig.plugins !== 'function'
+        && (postcssRTLOptions.source === 'ltr' || typeof postcssRTLOptions === 'function')
       ) {
         const originalPlugins = postcssOptions.plugins ? [ ...postcssOptions.plugins ] : []
 
@@ -181,7 +181,7 @@ async function injectRule (chain, pref, lang, test, loader, loaderOptions) {
 
 export async function injectStyleRules (chain, pref) {
   await injectRule(chain, pref, 'css', /\.css$/)
-  await injectRule(chain, pref, 'stylus', /\.styl(us)?$/, 'stylus-loader', pref.stylusLoaderOptions),
+  await injectRule(chain, pref, 'stylus', /\.styl(us)?$/, 'stylus-loader', pref.stylusLoaderOptions)
   await injectRule(chain, pref, 'scss', /\.scss$/, 'sass-loader', merge(
     { sassOptions: { outputStyle: /* required for RTL */ 'expanded' } },
     pref.scssLoaderOptions

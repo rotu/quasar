@@ -30,7 +30,7 @@ export const clearConsole = process.stdout.isTTY
   : () => {}
 
 export function log (msg) {
-  console.log(msg ? ` ${greenBanner} ${msg}` : '')
+  console.log(msg ? ` ${ greenBanner } ${ msg }` : '')
 }
 
 export function warn (msg, pill) {
@@ -39,7 +39,7 @@ export function warn (msg, pill) {
       ? bgYellow(black('', pill, '')) + ' '
       : ''
 
-    console.warn(` ${yellowBanner} ⚠️  ${pillBanner}${msg}`)
+    console.warn(` ${ yellowBanner } ⚠️  ${ pillBanner }${ msg }`)
   }
   else {
     console.warn()
@@ -55,10 +55,10 @@ export function fatal (msg, pill) {
     if (msg instanceof Error) {
       console.log()
       console.error(msg)
-      console.error(`\n ${redBanner} ⚠️  ${pillBanner}Fatal error above.\n`)
+      console.error(`\n ${ redBanner } ⚠️  ${ pillBanner }Fatal error above.\n`)
     }
     else {
-      console.error(`\n ${redBanner} ⚠️  ${pillBanner}${msg}\n`)
+      console.error(`\n ${ redBanner } ⚠️  ${ pillBanner }${ msg }\n`)
     }
   }
   else {
@@ -78,33 +78,33 @@ export const errorPill = msg => bgRed(white(` ${ msg } `))
 export const warningPill = msg => bgYellow(black(` ${ msg } `))
 
 export function success (msg, title = 'SUCCESS') {
-  console.log(` ${greenBanner} ${successPill(title)} ${green(`${ dot } ${ msg }`)}`)
+  console.log(` ${ greenBanner } ${ successPill(title) } ${ green(`${ dot } ${ msg }`) }`)
 }
 
 export function getSuccess (msg, title) {
-  return ` ${greenBanner} ${successPill(title)} ${green(`${ dot } ${ msg }`)}`
+  return ` ${ greenBanner } ${ successPill(title) } ${ green(`${ dot } ${ msg }`) }`
 }
 
 export function info (msg, title = 'INFO') {
-  console.log(` ${greenBanner} ${infoPill(title)} ${green(dot)} ${msg}`)
+  console.log(` ${ greenBanner } ${ infoPill(title) } ${ green(dot) } ${ msg }`)
 }
 
 export function getInfo (msg, title) {
-  return ` ${greenBanner} ${infoPill(title)} ${green(dot)} ${msg}`
+  return ` ${ greenBanner } ${ infoPill(title) } ${ green(dot) } ${ msg }`
 }
 
 export function error (msg, title = 'ERROR') {
-  console.log(` ${redBanner} ${errorPill(title)} ${red(`${ dot } ${ msg }`)}`)
+  console.log(` ${ redBanner } ${ errorPill(title) } ${ red(`${ dot } ${ msg }`) }`)
 }
 
 export function getError (msg, title = 'ERROR') {
-  return ` ${redBanner} ${errorPill(title)} ${red(`${ dot } ${ msg }`)}`
+  return ` ${ redBanner } ${ errorPill(title) } ${ red(`${ dot } ${ msg }`) }`
 }
 
 export function warning (msg, title = 'WARNING') {
-  console.log(` ${yellowBanner} ${warningPill(title)} ${yellow(`${ dot } ${ msg }`)}`)
+  console.log(` ${ yellowBanner } ${ warningPill(title) } ${ yellow(`${ dot } ${ msg }`) }`)
 }
 
 export function getWarning (msg, title = 'WARNING') {
-  return ` ${yellowBanner} ${warningPill(title)} ${yellow(`${ dot } ${ msg }`)}`
+  return ` ${ yellowBanner } ${ warningPill(title) } ${ yellow(`${ dot } ${ msg }`) }`
 }

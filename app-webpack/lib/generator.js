@@ -38,7 +38,7 @@ export class Generator {
 
     this.files = paths.map(file => {
       const content = fs.readFileSync(
-        appPaths.resolve.cli(`templates/entry/${file}`),
+        appPaths.resolve.cli(`templates/entry/${ file }`),
         'utf-8'
       )
 

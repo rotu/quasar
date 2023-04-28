@@ -1,5 +1,5 @@
 
-import { readFileSync} from 'node:fs'
+import { readFileSync } from 'node:fs'
 import webpack from 'webpack'
 
 import appPaths from '../../app-paths.js'
@@ -30,13 +30,13 @@ export class WebserverAssetsPlugin {
     )
 
     if (appPkg.dependencies !== void 0) {
-      delete appPkg.dependencies['@quasar/extras']
+      delete appPkg.dependencies[ '@quasar/extras' ]
     }
 
     const appDeps = getFixedDeps(appPkg.dependencies || {})
     const cliDeps = getFixedDeps(cliPkg.dependencies)
 
-    let pkg = {
+    const pkg = {
       name: appPkg.name,
       version: appPkg.version,
       description: appPkg.description,
@@ -50,10 +50,10 @@ export class WebserverAssetsPlugin {
         {
           'compression': '^1.0.0',
           'express': '^4.0.0',
-          '@quasar/ssr-helpers': cliDeps['@quasar/ssr-helpers']
+          '@quasar/ssr-helpers': cliDeps[ '@quasar/ssr-helpers' ]
         },
         this.cfg.build.transpile === true
-          ? { '@quasar/babel-preset-app': cliDeps['@quasar/babel-preset-app'] }
+          ? { '@quasar/babel-preset-app': cliDeps[ '@quasar/babel-preset-app' ] }
           : {}
       ),
       engines: appPkg.engines,
@@ -71,6 +71,6 @@ export class WebserverAssetsPlugin {
   initHtmlTemplate () {
     const htmlFile = appPaths.resolve.app(this.cfg.sourceFiles.indexHtmlTemplate)
     const renderTemplate = getIndexHtml(readFileSync(htmlFile, 'utf-8'), this.cfg)
-    this.htmlTemplate = `module.exports=${renderTemplate.source}`
+    this.htmlTemplate = `module.exports=${ renderTemplate.source }`
   }
 }

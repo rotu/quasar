@@ -1,4 +1,5 @@
 
+import { readFileSync } from 'node:fs'
 import { version } from '../version.js'
 
 console.log()

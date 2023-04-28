@@ -96,11 +96,11 @@ export class IndexAPI extends BaseAPI {
     const json = getPackageJson(name)
 
     if (json === void 0) {
-      fatal(`Extension(${this.extId}): Dependency not found - ${name}. Please install it.`)
+      fatal(`Extension(${ this.extId }): Dependency not found - ${ name }. Please install it.`)
     }
 
     if (!semver.satisfies(json.version, semverCondition)) {
-      fatal(`Extension(${this.extId}): is not compatible with ${name} v${json.version}. Required version: ${semverCondition}`)
+      fatal(`Extension(${ this.extId }): is not compatible with ${ name } v${ json.version }. Required version: ${ semverCondition }`)
     }
   }
 
@@ -233,7 +233,7 @@ export class IndexAPI extends BaseAPI {
    *   ({ args: [ string, ... ], params: {object} }) => ?Promise
    */
   registerCommand (commandName, fn) {
-    this.__hooks.commands[commandName] = fn
+    this.__hooks.commands[ commandName ] = fn
   }
 
   /**
@@ -246,7 +246,7 @@ export class IndexAPI extends BaseAPI {
   registerDescribeApi (name, relativePath) {
     const callerPath = getCallerPath()
 
-    this.__hooks.describeApi[name] = {
+    this.__hooks.describeApi[ name ] = {
       callerPath,
       relativePath
     }

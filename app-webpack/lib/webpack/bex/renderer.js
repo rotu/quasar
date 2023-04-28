@@ -44,11 +44,11 @@ export async function injectBexRenderer (chain, cfg) {
     // Register our plugin, update the manifest and package the browser extension.
     const { BexPackagerPlugin } = await import('./plugin.bex-packager.js')
     chain.plugin('webpack-bex-packager')
-      .use(BexPackagerPlugin, [{
+      .use(BexPackagerPlugin, [ {
         src: cfg.bex.builder.directories.input,
         dest: cfg.bex.builder.directories.output,
         name: JSON.parse(fse.readFileSync(appPaths.resolve.app('package.json'), 'utf8')).name
-      }])
+      } ])
 
     // Copy our user edited BEX files to the dist dir (excluding the already built www folder)
     copyPatterns.push({
@@ -70,5 +70,5 @@ export async function injectBexRenderer (chain, cfg) {
 
   // Copy any files we've registered during the chain.
   chain.plugin('copy-webpack')
-    .use(CopyWebpackPlugin, [{ patterns: copyPatterns }])
+    .use(CopyWebpackPlugin, [ { patterns: copyPatterns } ])
 }

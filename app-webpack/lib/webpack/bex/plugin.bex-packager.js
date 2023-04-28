@@ -5,7 +5,7 @@ import archiver from 'archiver'
 
 function findAndReplaceInSection (sectionArray, find, replace) {
   const index = sectionArray.indexOf(find)
-  sectionArray[index] = replace
+  sectionArray[ index ] = replace
 }
 
 export class BexPackagerPlugin {
@@ -33,10 +33,10 @@ export class BexPackagerPlugin {
     const manifestFilePath = join(this.options.src, 'manifest.json')
     if (fse.existsSync(manifestFilePath) === true) {
       const manifestFileData = fse.readFileSync(manifestFilePath)
-      let manifestData = JSON.parse(manifestFileData.toString())
+      const manifestData = JSON.parse(manifestFileData.toString())
 
       findAndReplaceInSection(manifestData.background.scripts, 'www/bex-background.js', 'www/js/bex-background.js')
-      findAndReplaceInSection(manifestData.content_scripts[0].js, 'www/bex-content-script.js', 'www/js/bex-content-script.js')
+      findAndReplaceInSection(manifestData.content_scripts[ 0 ].js, 'www/bex-content-script.js', 'www/js/bex-content-script.js')
       const newValue = JSON.stringify(manifestData)
       fse.writeFileSync(manifestFilePath, newValue, 'utf-8')
     }
@@ -56,8 +56,8 @@ export class BexPackagerPlugin {
   }
 
   outputToZip (src, dest, fileName) {
-    let output = fse.createWriteStream(join(dest, fileName + '.zip'))
-    let archive = archiver('zip', {
+    const output = fse.createWriteStream(join(dest, fileName + '.zip'))
+    const archive = archiver('zip', {
       zlib: { level: 9 } // Sets the compression level.
     })
 

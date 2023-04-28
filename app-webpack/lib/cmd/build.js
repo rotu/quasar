@@ -17,8 +17,8 @@ const argv = parseArgs(process.argv.slice(2), {
     h: 'help',
     P: 'publish'
   },
-  boolean: ['h', 'd', 'u', 'i'],
-  string: ['m', 'T', 'P'],
+  boolean: [ 'h', 'd', 'u', 'i' ],
+  string: [ 'm', 'T', 'P' ],
   default: {
     m: 'spa'
   }
@@ -132,11 +132,11 @@ function parseWebpackConfig (cfg, mode) {
 async function finalizeBuild (mode, ctx, quasarConfFile) {
   let Runner
 
-  if (['cordova', 'capacitor'].includes(mode)) {
+  if ([ 'cordova', 'capacitor' ].includes(mode)) {
     const { default: RunnerInstance } = await import(`../${ mode }/index.js`)
     Runner = RunnerInstance
   }
-  else if (argv['skip-pkg'] !== true && mode === 'electron') {
+  else if (argv[ 'skip-pkg' ] !== true && mode === 'electron') {
     const { default: RunnerInstance } = await import('../electron/index.js')
     Runner = RunnerInstance
   }
@@ -208,7 +208,7 @@ async function build () {
 
   // run possible beforeBuild hooks
   await extensionRunner.runHook('beforeBuild', async hook => {
-    log(`Extension(${hook.api.extId}): Running beforeBuild hook...`)
+    log(`Extension(${ hook.api.extId }): Running beforeBuild hook...`)
     await hook.fn(hook.api, { quasarConf })
   })
 
@@ -247,16 +247,16 @@ async function build () {
         return
       }
 
-      const summary = printWebpackErrors(webpackData.name[index], stats)
+      const summary = printWebpackErrors(webpackData.name[ index ], stats)
       console.log()
-      fatal(`for "${webpackData.name[index]}" with ${summary}. Please check the log above.`, 'COMPILATION FAILED')
+      fatal(`for "${ webpackData.name[ index ] }" with ${ summary }. Please check the log above.`, 'COMPILATION FAILED')
     })
 
     const { printWebpackStats } = await import('../helpers/print-webpack-stats.js')
 
     console.log()
     statsArray.forEach((stats, index) => {
-      printWebpackStats(stats, webpackData.folder[index], webpackData.name[index])
+      printWebpackStats(stats, webpackData.folder[ index ], webpackData.name[ index ])
     })
 
     // free up memory
@@ -276,7 +276,7 @@ async function build () {
 
     // run possible beforeBuild hooks
     await extensionRunner.runHook('afterBuild', async hook => {
-      log(`Extension(${hook.api.extId}): Running afterBuild hook...`)
+      log(`Extension(${ hook.api.extId }): Running afterBuild hook...`)
       await hook.fn(hook.api, { quasarConf })
     })
 
@@ -293,7 +293,7 @@ async function build () {
 
       // run possible onPublish hooks
       await extensionRunner.runHook('onPublish', async hook => {
-        log(`Extension(${hook.api.extId}): Running onPublish hook...`)
+        log(`Extension(${ hook.api.extId }): Running onPublish hook...`)
         await hook.fn(hook.api, opts)
       })
     }

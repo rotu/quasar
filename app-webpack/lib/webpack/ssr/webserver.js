@@ -21,11 +21,11 @@ const flattenObject = (obj, prefix = 'process.env') => {
     .reduce((acc, k) => {
       const pre = prefix.length ? prefix + '.' : ''
 
-      if (Object(obj[k]) === obj[k]) {
-        Object.assign(acc, flattenObject(obj[k], pre + k))
+      if (Object(obj[ k ]) === obj[ k ]) {
+        Object.assign(acc, flattenObject(obj[ k ], pre + k))
       }
       else {
-        acc[pre + k] = JSON.stringify(obj[k])
+        acc[ pre + k ] = JSON.stringify(obj[ k ])
       }
 
       return acc
@@ -52,8 +52,8 @@ export function createSSRWebserverChain (cfg, configName) {
   chain.mode(cfg.ctx.prod ? 'production' : 'development')
 
   if (
-    existsSync(prodExportFile.js) === false &&
-    existsSync(prodExportFile.ts) === false
+    existsSync(prodExportFile.js) === false
+    && existsSync(prodExportFile.ts) === false
   ) {
     chain.resolve.alias.set('src-ssr/production-export', prodExportFile.fallback)
   }
@@ -123,7 +123,7 @@ export function createSSRWebserverChain (cfg, configName) {
   injectNodeTypescript(cfg, chain)
 
   chain.plugin('progress')
-    .use(WebpackProgressPlugin, [{ name: configName, cfg, hasExternalWork: true }])
+    .use(WebpackProgressPlugin, [ { name: configName, cfg, hasExternalWork: true } ])
 
   if (cfg.ctx.prod) {
     // we need to set process.env.NODE_ENV to 'production'
@@ -148,7 +148,7 @@ export function createSSRWebserverChain (cfg, configName) {
     }))
 
     chain.plugin('copy-webpack')
-      .use(CopyWebpackPlugin, [{ patterns }])
+      .use(CopyWebpackPlugin, [ { patterns } ])
   }
 
   if (cfg.ctx.debug || (cfg.ctx.prod && cfg.build.minify !== true)) {
