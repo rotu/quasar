@@ -4,7 +4,7 @@ import { join } from 'node:path'
 import {
   createViteConfig, extendViteConfig, mergeViteConfig,
   createNodeEsbuildConfig, extendEsbuildConfig
-} from '../../config-tools'
+} from '../../config-tools.js'
 
 import appPaths from '../../app-paths.js'
 
@@ -81,8 +81,8 @@ export const ssrConfig = {
   webserver: async quasarConf => {
     const cfg = await createNodeEsbuildConfig(quasarConf, 'esm', { cacheSuffix: 'ssr-webserver' })
 
-    cfg.define['process.env.CLIENT'] = false
-    cfg.define['process.env.SERVER'] = true
+    cfg.define[ 'process.env.CLIENT' ] = false
+    cfg.define[ 'process.env.SERVER' ] = true
 
     if (quasarConf.ctx.dev) {
       cfg.entryPoints = [ appPaths.resolve.app('.quasar/ssr-dev-webserver.js') ]

@@ -26,7 +26,7 @@ export class AppTool {
   }
 
   async watchWithEsbuild (threadName, esbuildConfig, onRebuildSuccess) {
-    let resolve, esbuildCtx
+    let resolve
 
     if (esbuildConfig.plugins === void 0) {
       esbuildConfig.plugins = []
@@ -63,7 +63,7 @@ export class AppTool {
       }
     })
 
-    esbuildCtx = await esbuild.context(esbuildConfig)
+    const esbuildCtx = await esbuild.context(esbuildConfig)
     await esbuildCtx.watch()
 
     return new Promise(res => {

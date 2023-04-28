@@ -26,15 +26,15 @@ async function promptOverwrite ({ targetPath, options }) {
     { name: 'Skip all (might break extension)', value: 'skipAll' }
   ]
 
-  return await inquirer.prompt([{
+  return await inquirer.prompt([ {
     name: 'action',
     type: 'list',
-    message: `Overwrite "${path.relative(appPaths.appDir, targetPath)}"?`,
+    message: `Overwrite "${ path.relative(appPaths.appDir, targetPath) }"?`,
     choices: options !== void 0
       ? choices.filter(choice => options.includes(choice.value))
       : choices,
     default: 'overwrite'
-  }])
+  } ])
 }
 
 async function renderFile ({ sourcePath, targetPath, rawCopy, scope, overwritePrompt }) {
@@ -64,17 +64,17 @@ async function renderFile ({ sourcePath, targetPath, rawCopy, scope, overwritePr
 async function renderFolders ({ source, rawCopy, scope }) {
   let overwrite
   const { default: fglob } = await import('fast-glob')
-  const files = fglob.sync(['**/*'], { cwd: source })
+  const files = fglob.sync([ '**/*' ], { cwd: source })
 
   for (const rawPath of files) {
     const targetRelativePath = rawPath.split('/').map(name => {
       // dotfiles are ignored when published to npm, therefore in templates
       // we need to use underscore instead (e.g. "_gitignore")
       if (name.charAt(0) === '_' && name.charAt(1) !== '_') {
-        return `.${name.slice(1)}`
+        return `.${ name.slice(1) }`
       }
       if (name.charAt(0) === '_' && name.charAt(1) === '_') {
-        return `${name.slice(1)}`
+        return `${ name.slice(1) }`
       }
       return name
     }).join('/')
@@ -111,12 +111,12 @@ export class Extension {
     if (name.charAt(0) === '@') {
       const slashIndex = name.indexOf('/')
       if (slashIndex === -1) {
-        fatal(`Invalid Quasar App Extension name: "${name}"`)
+        fatal(`Invalid Quasar App Extension name: "${ name }"`)
       }
 
-      this.packageFullName = name.substring(0, slashIndex + 1) +
-        'quasar-app-extension-' +
-        name.substring(slashIndex + 1)
+      this.packageFullName = name.substring(0, slashIndex + 1)
+        + 'quasar-app-extension-'
+        + name.substring(slashIndex + 1)
 
       this.packageName = '@' + this.__stripVersion(this.packageFullName.substring(1))
       this.extId = '@' + this.__stripVersion(name.substring(1))
@@ -160,7 +160,7 @@ export class Extension {
       )
     }
 
-    log(`${skipPkgInstall ? 'Invoking' : 'Installing'} "${this.extId}" Quasar App Extension`)
+    log(`${ skipPkgInstall ? 'Invoking' : 'Installing' } "${ this.extId }" Quasar App Extension`)
     log()
 
     const isInstalled = this.isInstalled()
@@ -168,16 +168,16 @@ export class Extension {
     // verify if already installed
     if (skipPkgInstall === true) {
       if (!isInstalled) {
-        fatal(`Tried to invoke App Extension "${this.extId}" but its npm package is not installed`)
+        fatal(`Tried to invoke App Extension "${ this.extId }" but its npm package is not installed`)
       }
     }
     else if (isInstalled) {
-      const answer = await inquirer.prompt([{
+      const answer = await inquirer.prompt([ {
         name: 'reinstall',
         type: 'confirm',
         message: `Already installed. Reinstall?`,
         default: false
-      }])
+      } ])
 
       if (!answer.reinstall) {
         return
@@ -194,7 +194,7 @@ export class Extension {
     // run extension install
     const hooks = await this.__runInstallScript(prompts)
 
-    log(`Quasar App Extension "${this.extId}" successfully installed.`)
+    log(`Quasar App Extension "${ this.extId }" successfully installed.`)
     log()
 
     if (hooks && hooks.exitLog.length > 0) {
@@ -206,7 +206,7 @@ export class Extension {
   }
 
   async uninstall (skipPkgUninstall) {
-    log(`${skipPkgUninstall ? 'Uninvoking' : 'Uninstalling'} "${this.extId}" Quasar App Extension`)
+    log(`${ skipPkgUninstall ? 'Uninvoking' : 'Uninstalling' } "${ this.extId }" Quasar App Extension`)
     log()
 
     const isInstalled = this.isInstalled()
@@ -214,11 +214,11 @@ export class Extension {
     // verify if already installed
     if (skipPkgUninstall === true) {
       if (!isInstalled) {
-        fatal(`Tried to uninvoke App Extension "${this.extId}" but there's no npm package installed for it.`)
+        fatal(`Tried to uninvoke App Extension "${ this.extId }" but there's no npm package installed for it.`)
       }
     }
     else if (!isInstalled) {
-      warn(`Quasar App Extension "${this.packageName}" is not installed...`)
+      warn(`Quasar App Extension "${ this.packageName }" is not installed...`)
       return
     }
 
@@ -230,7 +230,7 @@ export class Extension {
     // yarn/npm uninstall
     skipPkgUninstall !== true && this.__uninstallPackage()
 
-    log(`Quasar App Extension "${this.extId}" successfully removed.`)
+    log(`Quasar App Extension "${ this.extId }" successfully removed.`)
     log()
 
     if (hooks && hooks.exitLog.length > 0) {
@@ -243,7 +243,7 @@ export class Extension {
 
   async run (ctx) {
     if (!this.isInstalled()) {
-      warn(`Quasar App Extension "${this.extId}" is missing...`)
+      warn(`Quasar App Extension "${ this.extId }" is missing...`)
       process.exit(1, 'ext-missing')
     }
 
@@ -255,7 +255,7 @@ export class Extension {
       ctx
     })
 
-    log(`Running "${this.extId}" Quasar App Extension...`)
+    log(`Running "${ this.extId }" Quasar App Extension...`)
     await script(api)
 
     return api.__getHooks()
@@ -298,22 +298,22 @@ export class Extension {
    * as long as the corresponding file isn't available into the `src` folder, making the feature opt-in
    */
   __getScriptFile (scriptName) {
-    let scriptFile = path.join(this.packagePath, `src/${scriptName}.js`)
+    let scriptFile = path.join(this.packagePath, `src/${ scriptName }.js`)
     if (fse.existsSync(scriptFile)) {
       return scriptFile
     }
 
-    scriptFile = path.join(this.packagePath, `dist/${scriptName}.js`)
+    scriptFile = path.join(this.packagePath, `dist/${ scriptName }.js`)
     if (fse.existsSync(scriptFile)) {
       return scriptFile
     }
 
-    scriptFile = path.join(this.packagePath, `src/${scriptName}.ts`)
+    scriptFile = path.join(this.packagePath, `src/${ scriptName }.ts`)
     if (fse.existsSync(scriptFile)) {
       return scriptFile
     }
 
-    scriptFile = path.join(this.packagePath, `dist/${scriptName}.ts`)
+    scriptFile = path.join(this.packagePath, `dist/${ scriptName }.ts`)
     if (fse.existsSync(scriptFile)) {
       return scriptFile
     }
@@ -324,7 +324,7 @@ export class Extension {
 
     if (!script) {
       if (fatalError) {
-        fatal(`App Extension "${this.extId}" has missing ${scriptName} script...`)
+        fatal(`App Extension "${ this.extId }" has missing ${ scriptName } script...`)
       }
 
       return
@@ -357,13 +357,13 @@ export class Extension {
     const hooks = api.__getHooks()
 
     if (hooks.renderFolders.length > 0) {
-      for (let entry of hooks.renderFolders) {
+      for (const entry of hooks.renderFolders) {
         await renderFolders(entry)
       }
     }
 
     if (hooks.renderFiles.length > 0) {
-      for (let entry of hooks.renderFiles) {
+      for (const entry of hooks.renderFiles) {
         await renderFile(entry)
       }
     }

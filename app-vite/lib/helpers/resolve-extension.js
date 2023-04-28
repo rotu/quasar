@@ -1,7 +1,7 @@
 
 import { existsSync } from 'node:fs'
 
-const extensions = [ '', '.js', '.ts', '.jsx', '.tsx']
+const extensions = [ '', '.js', '.ts', '.jsx', '.tsx' ]
 
 export function resolveExtension (file) {
   for (const ext of extensions) {

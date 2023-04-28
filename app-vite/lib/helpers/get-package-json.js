@@ -12,7 +12,7 @@ export function getPackageJson (pkgName, folder = appPaths.appDir) {
   try {
     return JSON.parse(
       readFileSync(
-        getPackagePath(`${pkgName}/package.json`, folder),
+        getPackagePath(`${ pkgName }/package.json`, folder),
         'utf-8'
       )
     )

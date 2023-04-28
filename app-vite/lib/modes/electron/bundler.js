@@ -9,21 +9,21 @@ const versions = {
 }
 
 function isValidName (bundlerName) {
-  return ['packager', 'builder'].includes(bundlerName)
+  return [ 'packager', 'builder' ].includes(bundlerName)
 }
 
 function installBundler (bundlerName) {
   nodePackager.installPackage(
-    `electron-${bundlerName}@^${versions[bundlerName]}`,
-    { isDev: true, displayName: `electron-${bundlerName}` }
+    `electron-${ bundlerName }@^${ versions[ bundlerName ] }`,
+    { isDev: true, displayName: `electron-${ bundlerName }` }
   )
 }
 
 export function bundlerIsInstalled (bundlerName) {
-  const pgkName = `electron-${bundlerName}`
+  const pgkName = `electron-${ bundlerName }`
   return (
-    (appPackageJson.devDependencies && appPackageJson.devDependencies[pgkName])
-    || (appPackageJson.dependencies && appPackageJson.dependencies[pgkName])
+    (appPackageJson.devDependencies && appPackageJson.devDependencies[ pgkName ])
+    || (appPackageJson.dependencies && appPackageJson.dependencies[ pgkName ])
   ) !== void 0
 }
 

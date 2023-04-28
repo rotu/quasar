@@ -193,7 +193,7 @@ export function extendViteConfig (viteConf, quasarConf, invokeParams) {
   }
 
   const promise = extensionRunner.runHook('extendViteConf', async hook => {
-    log(`Extension(${hook.api.extId}): Extending Vite config`)
+    log(`Extension(${ hook.api.extId }): Extending Vite config`)
     await hook.fn(viteConf, opts, hook.api)
   })
 
@@ -248,15 +248,15 @@ export async function createBrowserEsbuildConfig (quasarConf, getLinterOpts) {
 }
 
 export function extendEsbuildConfig (esbuildConf, quasarConfTarget, threadName) {
-  const method = `extend${threadName}Conf`
+  const method = `extend${ threadName }Conf`
 
   // example: quasarConf.ssr.extendSSRWebserverConf
-  if (typeof quasarConfTarget[method] === 'function') {
-    quasarConfTarget[method](esbuildConf)
+  if (typeof quasarConfTarget[ method ] === 'function') {
+    quasarConfTarget[ method ](esbuildConf)
   }
 
   const promise = extensionRunner.runHook(method, async hook => {
-    log(`Extension(${hook.api.extId}): Extending "${threadName}" Esbuild config`)
+    log(`Extension(${ hook.api.extId }): Extending "${ threadName }" Esbuild config`)
     await hook.fn(esbuildConf, hook.api)
   })
 

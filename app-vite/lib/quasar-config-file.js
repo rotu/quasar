@@ -9,7 +9,7 @@ import { transformAssetUrls } from '@quasar/vite-plugin'
 import esbuild from 'esbuild'
 
 import appPaths from './app-paths.js'
-import { log, warn, tip } from './helpers/logger.js'
+import { log, warn, fatal, tip } from './helpers/logger.js'
 import { extensionRunner } from './app-extension/extensions-runner.js'
 import { appFilesValidations } from './helpers/app-files-validations.js'
 import { cssVariables } from './helpers/css-variables.js'
@@ -44,7 +44,7 @@ function formatPublicPath (path) {
   }
 
   if (!path.endsWith('/')) {
-    path = `${path}/`
+    path = `${ path }/`
   }
 
   if (urlRegex.test(path) === true) {
@@ -52,7 +52,7 @@ function formatPublicPath (path) {
   }
 
   if (!path.startsWith('/')) {
-    path = `/${path}`
+    path = `/${ path }`
   }
 
   return path
@@ -64,21 +64,21 @@ function formatRouterBase (publicPath) {
   }
 
   const match = publicPath.match(/^(https?\:)\/\/(([^:\/?#]*)(?:\:([0-9]+))?)([\/]{0,1}[^?#]*)(\?[^#]*|)(#.*|)$/)
-  return formatPublicPath(match[5] || '')
+  return formatPublicPath(match[ 5 ] || '')
 }
 
 function parseAssetProperty (prefix) {
   return asset => {
     if (typeof asset === 'string') {
       return {
-        path: asset[0] === '~' ? asset.substring(1) : prefix + `/${asset}`
+        path: asset[ 0 ] === '~' ? asset.substring(1) : prefix + `/${ asset }`
       }
     }
 
     return {
       ...asset,
       path: typeof asset.path === 'string'
-        ? (asset.path[0] === '~' ? asset.path.substring(1) : prefix + `/${asset.path}`)
+        ? (asset.path[ 0 ] === '~' ? asset.path.substring(1) : prefix + `/${ asset.path }`)
         : asset.path
     }
   }
@@ -99,8 +99,8 @@ async function onAddress ({ host, port }, mode) {
     host = addressChosenHost
   }
   else if (
-    ['cordova', 'capacitor'].includes(mode) &&
-    (!host || ['0.0.0.0', 'localhost', '127.0.0.1', '::1'].includes(host.toLowerCase()))
+    [ 'cordova', 'capacitor' ].includes(mode)
+    && (!host || [ '0.0.0.0', 'localhost', '127.0.0.1', '::1' ].includes(host.toLowerCase()))
   ) {
     const { getExternalIP } = await import('../lib/helpers/get-external-ip.js')
     host = await getExternalIP()
@@ -111,7 +111,7 @@ async function onAddress ({ host, port }, mode) {
     const openPort = await findClosestOpenPort(port, host)
     if (port !== openPort) {
       warn()
-      warn(`️️Setting port to closest one available: ${openPort}`)
+      warn(`️️Setting port to closest one available: ${ openPort }`)
       warn()
 
       port = openPort
@@ -146,7 +146,7 @@ async function onAddress ({ host, port }, mode) {
 
 async function compileQuasarConfigFile (file, { format = 'esm' } = {}) {
   const ext = format === 'esm' ? 'mjs' : 'cjs'
-  const compiledFile = `${file}.${Date.now()}.${ext}`
+  const compiledFile = `${ file }.${ Date.now() }.${ ext }`
 
   await esbuild.build({
     platform: 'node',
@@ -232,7 +232,7 @@ export class QuasarConfFile {
       catch (e) {
         tempFile && fse.removeSync(tempFile)
         console.error(e)
-        return { error: 'quasar.config.js has errors' }
+        return { error: 'quasar.config has errors' }
       }
     }
 
@@ -253,7 +253,7 @@ export class QuasarConfFile {
     }
     catch (e) {
       console.error(e)
-      return { error: 'quasar.config.js has runtime errors' }
+      return { error: 'quasar.config has runtime errors' }
     }
 
     const rawQuasarConf = merge({
@@ -322,7 +322,7 @@ export class QuasarConfFile {
 
     try {
       await extensionRunner.runHook('extendQuasarConf', async hook => {
-        log(`Extension(${hook.api.extId}): Extending quasar.config.js...`)
+        log(`Extension(${ hook.api.extId }): Extending quasar.config...`)
         await hook.fn(rawQuasarConf, hook.api)
       })
     }
@@ -361,17 +361,17 @@ export class QuasarConfFile {
         tip('You are using the --port parameter. It is recommended to use a different devServer port for each Quasar mode to avoid browser cache issues')
       }
       else if (!cfg.devServer.port) {
-        cfg.devServer.port = defaultPortMapping[this.#ctx.modeName]
+        cfg.devServer.port = defaultPortMapping[ this.#ctx.modeName ]
           + (this.#ctx.mode.ssr === true && cfg.ssr.pwa === true ? 50 : 0)
       }
       else {
-        tip('You specified an explicit quasar.config.js > devServer > port. It is recommended to use a different devServer > port for each Quasar mode to avoid browser cache issues. Example: ctx.mode.ssr ? 9100 : ...')
+        tip('You specified an explicit quasar.config > devServer > port. It is recommended to use a different devServer > port for each Quasar mode to avoid browser cache issues. Example: ctx.mode.ssr ? 9100 : ...')
       }
 
       if (
-        this.#address &&
-        this.#address.from.host === cfg.devServer.host &&
-        this.#address.from.port === cfg.devServer.port
+        this.#address
+        && this.#address.from.host === cfg.devServer.host
+        && this.#address.from.port === cfg.devServer.port
       ) {
         cfg.devServer.host = this.#address.to.host
         cfg.devServer.port = this.#address.to.port
@@ -387,7 +387,7 @@ export class QuasarConfFile {
 
         // if network error while running
         if (to === null) {
-          return { error: 'Network error encountered while following the quasar.config.js host/port config' }
+          return { error: 'Network error encountered while following the quasar.config host/port config' }
         }
 
         cfg.devServer = merge({ open: true }, cfg.devServer, to)
@@ -423,7 +423,7 @@ export class QuasarConfFile {
       cfg.animations = getUniqueArray(cfg.animations)
     }
 
-    if (!['kebab', 'pascal', 'combined'].includes(cfg.framework.autoImportComponentCase)) {
+    if (![ 'kebab', 'pascal', 'combined' ].includes(cfg.framework.autoImportComponentCase)) {
       cfg.framework.autoImportComponentCase = 'kebab'
     }
 
@@ -508,10 +508,10 @@ export class QuasarConfFile {
       cfg.build.distDir = appPaths.resolve.app(cfg.build.distDir)
     }
 
-    cfg.build.publicPath =
-      cfg.build.publicPath && ['spa', 'pwa', 'ssr'].includes(this.#ctx.modeName)
+    cfg.build.publicPath
+      = cfg.build.publicPath && [ 'spa', 'pwa', 'ssr' ].includes(this.#ctx.modeName)
         ? formatPublicPath(cfg.build.publicPath)
-        : (['capacitor', 'cordova', 'electron', 'bex'].includes(this.#ctx.modeName) ? '' : '/')
+        : ([ 'capacitor', 'cordova', 'electron', 'bex' ].includes(this.#ctx.modeName) ? '' : '/')
 
     /* careful if you configure the following; make sure that you really know what you are doing */
     cfg.build.vueRouterBase = cfg.build.vueRouterBase !== void 0
@@ -523,7 +523,7 @@ export class QuasarConfFile {
     cfg.sourceFiles = merge({
       rootComponent: 'src/App.vue',
       router: 'src/router/index',
-      store: `src/${storeProvider.pathKey}/index`,
+      store: `src/${ storeProvider.pathKey }/index`,
       pwaRegisterServiceWorker: 'src-pwa/register-service-worker',
       pwaServiceWorker: 'src-pwa/custom-service-worker',
       pwaManifestFile: 'src-pwa/manifest.json',
@@ -605,14 +605,14 @@ export class QuasarConfFile {
         useCredentialsForManifestTag: false
       }, cfg.pwa)
 
-      if (!['generateSW', 'injectManifest'].includes(cfg.pwa.workboxMode)) {
+      if (![ 'generateSW', 'injectManifest' ].includes(cfg.pwa.workboxMode)) {
         return {
-          error: `Workbox strategy "${cfg.pwa.workboxMode}" is invalid. `
-            + `Valid quasar.config.js > pwa > workboxMode options are: generateSW or injectManifest\n`
+          error: `Workbox strategy "${ cfg.pwa.workboxMode }" is invalid. `
+            + `Valid quasar.config > pwa > workboxMode options are: generateSW or injectManifest\n`
         }
       }
 
-      cfg.build.env.SERVICE_WORKER_FILE = `${cfg.build.publicPath}${cfg.pwa.swFilename}`
+      cfg.build.env.SERVICE_WORKER_FILE = `${ cfg.build.publicPath }${ cfg.pwa.swFilename }`
       cfg.metaConf.pwaManifestFile = appPaths.resolve.app(cfg.sourceFiles.pwaManifestFile)
 
       // resolve extension
@@ -621,7 +621,7 @@ export class QuasarConfFile {
     }
 
     if (this.#ctx.dev) {
-      const getUrl = hostname => `http${cfg.devServer.https ? 's' : ''}://${hostname}:${cfg.devServer.port}${cfg.build.publicPath}`
+      const getUrl = hostname => `http${ cfg.devServer.https ? 's' : '' }://${ hostname }:${ cfg.devServer.port }${ cfg.build.publicPath }`
       const hostname = cfg.devServer.host === '0.0.0.0'
         ? 'localhost'
         : cfg.devServer.host
@@ -725,7 +725,7 @@ export class QuasarConfFile {
         }
 
         if (cfg.ctx.archName) {
-          cfg.electron.builder[cfg.ctx.archName] = true
+          cfg.electron.builder[ cfg.ctx.archName ] = true
         }
 
         if (cfg.ctx.publish) {

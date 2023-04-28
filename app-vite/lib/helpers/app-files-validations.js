@@ -8,7 +8,6 @@ import { entryPointMarkup, attachMarkup } from '../helpers/html-template.js'
 const file = appPaths.resolve.app('index.html')
 
 export function appFilesValidations (_cfg) {
-  let content
   let valid = true
 
   if (existsSync(file) === false) {
@@ -16,7 +15,7 @@ export function appFilesValidations (_cfg) {
     return false
   }
 
-  content = readFileSync(file, 'utf-8')
+  const content = readFileSync(file, 'utf-8')
 
   if (content.indexOf(attachMarkup) !== -1) {
     warn(`Please remove ${ attachMarkup } from

@@ -5,7 +5,7 @@ export function parseEnv (env, rawDefine) {
   const flatEnv = flattenObject(env)
 
   for (const key in flatEnv) {
-    acc[`process.env.${key}`] = JSON.stringify(flatEnv[key])
+    acc[ `process.env.${ key }` ] = JSON.stringify(flatEnv[ key ])
   }
 
   Object.assign(acc, rawDefine)
@@ -46,21 +46,21 @@ const flattenObject = obj => {
 	for (const key in obj) {
     if (!Object.prototype.hasOwnProperty.call(obj, key)) continue
 
-    if(typeof obj[key] !== 'object') {
-      result[key] = obj[key]
+    if(typeof obj[ key ] !== 'object') {
+      result[ key ] = obj[ key ]
       continue
     }
 
-    const flatObj = flattenObject(obj[key])
+    const flatObj = flattenObject(obj[ key ])
 
     // Save the object itself to it's root key
-    result[key] = flatObj
+    result[ key ] = flatObj
 
     // Save the child keys
     for (const flatKey in flatObj) {
       if (!Object.prototype.hasOwnProperty.call(flatObj, flatKey)) continue
 
-      result[`${key}.${flatKey}`] = flatObj[flatKey]
+      result[ `${ key }.${ flatKey }` ] = flatObj[ flatKey ]
     }
   }
 

@@ -64,12 +64,12 @@ export function cleanAll () {
       fse.removeSync(folder)
     }
 
-    log(`Cleaned build artifact: "${folder}"`)
+    log(`Cleaned build artifact: "${ folder }"`)
   })
 
-  let folder = appPaths.resolve.app('.quasar')
+  const folder = appPaths.resolve.app('.quasar')
   fse.removeSync(folder)
-  log(`Cleaned build artifact: "${folder}"`)
+  log(`Cleaned build artifact: "${ folder }"`)
 
   const distFolder = appPaths.resolve.app('dist')
 

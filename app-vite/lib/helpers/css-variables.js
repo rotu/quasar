@@ -9,7 +9,7 @@ const cssVariables = {
 }
 
 for (const ext of [ 'scss', 'sass' ]) {
-  const file = `src/css/quasar.variables.${ext}`
+  const file = `src/css/quasar.variables.${ ext }`
   if (existsSync(appPaths.resolve.app(file))) {
     cssVariables.quasarSrcExt = 'sass'
     cssVariables.variablesFile = file

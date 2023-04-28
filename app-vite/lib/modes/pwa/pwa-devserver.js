@@ -98,7 +98,7 @@ export class AppDevServer extends QuasarDevServer {
 
     function inject () {
       injectPwaManifest(quasarConf)
-      log(`Generated the PWA manifest file (${quasarConf.pwa.manifestFilename})`)
+      log(`Generated the PWA manifest file (${ quasarConf.pwa.manifestFilename })`)
     }
 
     this.#pwaManifestWatcher = chokidar.watch(

@@ -111,7 +111,7 @@ export class AppProdBuilder extends AppBuilder {
     }
 
     if (this.quasarConf.ssr.manualStoreSerialization !== true) {
-      pkg.dependencies['serialize-javascript'] = cliDeps['serialize-javascript']
+      pkg.dependencies[ 'serialize-javascript' ] = cliDeps[ 'serialize-javascript' ]
     }
 
     if (typeof this.quasarConf.ssr.extendPackageJson === 'function') {
@@ -127,11 +127,11 @@ export class AppProdBuilder extends AppBuilder {
 
     const templateFn = getProdSsrTemplateFn(html, this.quasarConf)
 
-    this.writeFile('render-template.js', `export default ${templateFn.source}`)
+    this.writeFile('render-template.js', `export default ${ templateFn.source }`)
 
     if (this.quasarConf.ssr.pwa === true) {
       this.writeFile(
-        `client/${this.quasarConf.ssr.ssrPwaHtmlFilename}`,
+        `client/${ this.quasarConf.ssr.ssrPwaHtmlFilename }`,
         transformProdSsrPwaOfflineHtml(html, this.quasarConf)
       )
     }

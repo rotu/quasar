@@ -38,7 +38,7 @@ function getAssets (distDir) {
 }
 
 function getHumanSize (bytes) {
-  return `${(bytes / 1024).toFixed(2)} KB`
+  return `${ (bytes / 1024).toFixed(2) } KB`
 }
 
 function getGzippedSize (file) {
@@ -56,7 +56,7 @@ function getTableLines (assets, showGzipped) {
     const dir = dirname(asset.name)
 
     const acc = [
-      (dir !== '.' ? gray(dir + '/') : '') + colorFn[asset.type](basename(asset.name)),
+      (dir !== '.' ? gray(dir + '/') : '') + colorFn[ asset.type ](basename(asset.name)),
       getHumanSize(asset.size)
     ]
 
@@ -102,7 +102,7 @@ export function printBuildSummary (distDir, showGzipped) {
 
   if (showGzipped === true) {
     header.push(underline('Gzipped'))
-    columns[2] = { alignment: 'right' }
+    columns[ 2 ] = { alignment: 'right' }
   }
 
   const data = [

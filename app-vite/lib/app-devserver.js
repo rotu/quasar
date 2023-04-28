@@ -5,7 +5,7 @@ import { encodeForDiff } from './helpers/encode-for-diff.js'
 import { createEntryFilesGenerator } from './entry-files-generator.js'
 
 function getConfSnapshot (extractFn, quasarConf) {
-  return extractFn(quasarConf).map(item => item ? encodeForDiff(item) : '')
+  return extractFn(quasarConf).map(item => (item ? encodeForDiff(item) : ''))
 }
 
 export class AppDevServer extends AppTool {
@@ -83,7 +83,7 @@ export class AppDevServer extends AppTool {
   }
 
   registerDiff (name, extractFn) {
-    this.#diffList[name] = {
+    this.#diffList[ name ] = {
       snapshot: null,
       extractFn
     }
@@ -95,7 +95,7 @@ export class AppDevServer extends AppTool {
       return list.some(entry => entry === true)
     }
 
-    const target = this.#diffList[name]
+    const target = this.#diffList[ name ]
     const { snapshot, extractFn } = target
 
     const newSnapshot = getConfSnapshot(extractFn, quasarConf)
@@ -107,7 +107,7 @@ export class AppDevServer extends AppTool {
 
     const len = newSnapshot.length
     for (let i = 0; i < len; i++) {
-      if (newSnapshot[i] !== snapshot[i]) {
+      if (newSnapshot[ i ] !== snapshot[ i ]) {
         // Leave here for debugging when needed
         // console.log(name, 'at index', i)
         // console.log('NEW >>>', newSnapshot[i])

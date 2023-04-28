@@ -67,17 +67,17 @@ export class AppDevServer extends QuasarDevServer {
     if (this.argv.ide) {
       await this.#runCordovaCommand(
         quasarConf,
-        ['prepare', this.#target].concat(this.argv._)
+        [ 'prepare', this.#target ].concat(this.argv._)
       )
 
       await openIDE('cordova', quasarConf.bin, this.#target, true)
       return
     }
 
-    const args = ['run', this.#target]
+    const args = [ 'run', this.#target ]
 
     if (this.#ctx.emulator) {
-      args.push(`--target=${this.#ctx.emulator}`)
+      args.push(`--target=${ this.#ctx.emulator }`)
     }
 
     await this.#runCordovaCommand(

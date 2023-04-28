@@ -136,7 +136,7 @@ export class AppDevServer extends QuasarDevServer {
         }
         else if (code) {
           warn()
-          fatal(`Electron process ended with error code: ${code}`)
+          fatal(`Electron process ended with error code: ${ code }`)
         }
         else { // else it wasn't killed by us
           warn()

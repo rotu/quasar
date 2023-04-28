@@ -5,7 +5,7 @@ import archiver from 'archiver'
 
 import { AppBuilder } from '../../app-builder.js'
 import { progress } from '../../helpers/logger.js'
-import { modeConfig} from './bex-config.js'
+import { modeConfig } from './bex-config.js'
 import { createManifest, copyBexAssets } from './utils.js'
 import { appPackageJson } from '../../helpers/app-package-json.js'
 
@@ -41,8 +41,8 @@ export class AppProdBuilder extends AppBuilder {
     const zipName = `Packaged.${ name }.zip`
     const file = join(folder, zipName)
 
-    let output = fse.createWriteStream(file)
-    let archive = archiver('zip', {
+    const output = fse.createWriteStream(file)
+    const archive = archiver('zip', {
       zlib: { level: 9 } // Sets the compression level.
     })
 
@@ -50,6 +50,6 @@ export class AppProdBuilder extends AppBuilder {
     archive.directory(folder, false, entryData => ((entryData.name !== zipName) ? entryData : false))
     archive.finalize()
 
-    done(`Bundle has been generated at: ${file}`)
+    done(`Bundle has been generated at: ${ file }`)
   }
 }

@@ -2,7 +2,7 @@
 import { join } from 'node:path'
 import fse from 'fs-extra'
 
-import AppBuilder from '../../app-builder'
+import AppBuilder from '../../app-builder.js'
 import { modeConfig } from './capacitor-config.js'
 
 import appPaths from '../../app-paths.js'
@@ -11,7 +11,7 @@ import { CapacitorConfigFile } from './config-file.js'
 import { spawn, spawnSync } from '../../helpers/spawn.js'
 import { openIDE } from '../../helpers/open-ide.js'
 import { onShutdown } from '../../helpers/on-shutdown.js'
-import { fixAndroidCleartext } from '../../helpers/fix-android-cleartext'
+import { fixAndroidCleartext } from '../../helpers/fix-android-cleartext.js'
 
 import { capBin } from './cap-cli.js'
 
@@ -49,7 +49,7 @@ export class AppProdBuilder extends AppBuilder {
 
     this.#capacitorConfigFile.prepareSSL(false, target)
 
-    if (this.argv['skip-pkg'] !== true) {
+    if (this.argv[ 'skip-pkg' ] !== true) {
       if (this.argv.ide === true) {
         await openIDE('capacitor', this.quasarConf.bin, target)
         process.exit(0)
@@ -89,7 +89,7 @@ export class AppProdBuilder extends AppBuilder {
 
   async #buildIos () {
     const buildType = this.ctx.debug ? 'debug' : 'release'
-    const args = `xcodebuild -workspace App.xcworkspace -scheme App -configuration ${buildType} -derivedDataPath`
+    const args = `xcodebuild -workspace App.xcworkspace -scheme App -configuration ${ buildType } -derivedDataPath`
 
     log('Building iOS app...')
 
@@ -120,8 +120,8 @@ export class AppProdBuilder extends AppBuilder {
     log('Building Android app...')
 
     await spawnSync(
-      `./gradlew${process.platform === 'win32' ? '.bat' : ''}`,
-      [ `assemble${this.ctx.debug ? 'Debug' : 'Release'}` ].concat(this.argv._),
+      `./gradlew${ process.platform === 'win32' ? '.bat' : '' }`,
+      [ `assemble${ this.ctx.debug ? 'Debug' : 'Release' }` ].concat(this.argv._),
       { cwd: appPaths.resolve.capacitor('android') },
       () => {
         warn()

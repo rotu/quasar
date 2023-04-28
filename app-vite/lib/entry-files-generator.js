@@ -25,7 +25,7 @@ class EntryFilesGenerator {
       filePaths.push(
         'server-entry.js',
         'ssr-middlewares.js',
-        `ssr-${ctx.dev ? 'dev' : 'prod'}-webserver.js`
+        `ssr-${ ctx.dev ? 'dev' : 'prod' }-webserver.js`
       )
     }
 
@@ -35,7 +35,7 @@ class EntryFilesGenerator {
 
     this.#files = filePaths.map(file => {
       const content = readFileSync(
-        appPaths.resolve.cli(`templates/entry/${file}`),
+        appPaths.resolve.cli(`templates/entry/${ file }`),
         'utf-8'
       )
 
@@ -49,7 +49,7 @@ class EntryFilesGenerator {
     })
 
     this.#folders = folderPaths.map(folder => ({
-      src: appPaths.resolve.cli(`templates/entry/${folder}`),
+      src: appPaths.resolve.cli(`templates/entry/${ folder }`),
       dest: path.join(quasarFolder, folder)
     }))
   }

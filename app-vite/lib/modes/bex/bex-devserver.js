@@ -77,7 +77,7 @@ export class AppDevServer extends QuasarDevServer {
     for (const name of quasarConf.bex.contentScripts) {
       const contentConfig = await modeConfig.contentScript(quasarConf, name)
 
-      await this.watchWithEsbuild(`Content Script (${name})`, contentConfig, rebuilt)
+      await this.watchWithEsbuild(`Content Script (${ name })`, contentConfig, rebuilt)
         .then(esbuildCtx => { this.#scriptWatchers.push({ close: esbuildCtx.dispose }) })
     }
 

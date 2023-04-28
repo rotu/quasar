@@ -8,7 +8,7 @@ const argv = parseArgs(process.argv.slice(2), {
     y: 'yes',
     h: 'help'
   },
-  boolean: ['y', 'h']
+  boolean: [ 'y', 'h' ]
 })
 
 function showHelp() {
@@ -37,7 +37,7 @@ if (argv.help) {
 
 if (argv._.length !== 0 && argv._.length !== 2) {
   console.log()
-  warn(`Wrong number of parameters (${argv._.length}).`)
+  warn(`Wrong number of parameters (${ argv._.length }).`)
   showHelp()
   process.exit(1)
 }
@@ -45,31 +45,31 @@ if (argv._.length !== 0 && argv._.length !== 2) {
 import { green, gray } from 'kolorist'
 
 async function run () {
-  let [ action, mode ] = argv._
+  const [ action, mode ] = argv._
 
-  if (!['add', 'remove'].includes(action)) {
+  if (![ 'add', 'remove' ].includes(action)) {
     console.log()
     warn(`Unknown action specified (${ action }).`)
     showHelp()
     process.exit(1)
   }
 
-  if (![undefined, 'pwa', 'cordova', 'capacitor', 'electron', 'ssr', 'bex'].includes(mode)) {
-    fatal(`Unknown mode "${ mode }" to ${action}`)
+  if (![ undefined, 'pwa', 'cordova', 'capacitor', 'electron', 'ssr', 'bex' ].includes(mode)) {
+    fatal(`Unknown mode "${ mode }" to ${ action }`)
   }
 
-  const installation = await import(`../modes/${mode}/${mode}-installation.js`)
+  const installation = await import(`../modes/${ mode }/${ mode }-installation.js`)
 
   if (action === 'remove' && argv.yes !== true && installation.isInstalled()) {
     console.log()
 
     const { default: inquirer } = await import('inquirer')
-    const answer = await inquirer.prompt([{
+    const answer = await inquirer.prompt([ {
       name: 'go',
       type: 'confirm',
-      message: `Will also remove /src-${mode} folder. Are you sure?`,
+      message: `Will also remove /src-${ mode } folder. Are you sure?`,
       default: false
-    }])
+    } ])
 
     if (!answer.go) {
       console.log()
@@ -79,25 +79,25 @@ async function run () {
     }
   }
 
-  await installation[action]()
+  await installation[ action ]()
 }
 
 async function displayModes () {
   log(`Detecting installed modes...`)
 
   const info = []
-  for (const mode of ['pwa', 'ssr', 'cordova', 'capacitor', 'electron', 'bex']) {
-    const { isInstalled } = await import(`../modes/${mode}/${mode}-installation.js`)
+  for (const mode of [ 'pwa', 'ssr', 'cordova', 'capacitor', 'electron', 'bex' ]) {
+    const { isInstalled } = await import(`../modes/${ mode }/${ mode }-installation.js`)
     info.push([
-      `Mode ${mode.toUpperCase()}`,
+      `Mode ${ mode.toUpperCase() }`,
       isInstalled() ? green('yes') : gray('no')
     ])
   }
 
   console.log(
-    '\n' +
-    info.map(msg => ' ' + msg[0].padEnd(16, '.') + ' ' + msg[1]).join('\n') +
     '\n'
+    + info.map(msg => ' ' + msg[ 0 ].padEnd(16, '.') + ' ' + msg[ 1 ]).join('\n')
+    + '\n'
   )
 }
 

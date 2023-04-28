@@ -4,7 +4,7 @@ import { getPackageJson } from './get-package-json.js'
 
 function getMajorVersion (version) {
   const matches = version.match(/^(\d)\./)
-  return parseInt(matches[1], 10)
+  return parseInt(matches[ 1 ], 10)
 }
 
 /**

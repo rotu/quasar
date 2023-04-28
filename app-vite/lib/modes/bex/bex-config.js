@@ -37,7 +37,7 @@ export const modeConfig = {
 
   backgroundScript: quasarConf => createScript(quasarConf, 'background'),
   contentScript: (quasarConf, name) => {
-    const entry = appPaths.resolve.app(`.quasar/bex/entry-content-script-${name}.js`)
+    const entry = appPaths.resolve.app(`.quasar/bex/entry-content-script-${ name }.js`)
 
     writeFileSync(
       entry,

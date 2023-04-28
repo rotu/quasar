@@ -17,8 +17,8 @@ const argv = parseArgs(process.argv.slice(2), {
     h: 'help',
     P: 'publish'
   },
-  boolean: ['h', 'd', 'u', 'i'],
-  string: ['m', 'T', 'P'],
+  boolean: [ 'h', 'd', 'u', 'i' ],
+  string: [ 'm', 'T', 'P' ],
   default: {
     m: 'spa'
   }
@@ -108,8 +108,8 @@ import path from 'node:path'
 
 async function build () {
   // install mode if it's missing
-  const { add } = await import(`../modes/${argv.mode}/${argv.mode}-installation.js`)
-  await add(true, argv.target)
+  const { add: addMode } = await import(`../modes/${ argv.mode }/${ argv.mode }-installation.js`)
+  await addMode(true, argv.target)
 
   const { getQuasarCtx } = await import('../helpers/get-quasar-ctx.js')
   const ctx = getQuasarCtx({
@@ -141,7 +141,7 @@ async function build () {
   const { regenerateTypesFeatureFlags } = await import('../helpers/types-feature-flags.js')
   regenerateTypesFeatureFlags(quasarConf)
 
-  const { AppProdBuilder } = await import(`../modes/${argv.mode}/${argv.mode}-builder.js`)
+  const { AppProdBuilder } = await import(`../modes/${ argv.mode }/${ argv.mode }-builder.js`)
   const appBuilder = new AppProdBuilder({ argv, quasarConf })
 
   const { clean, add } = await import('../artifacts.js')
@@ -158,7 +158,7 @@ async function build () {
 
   // run possible beforeBuild hooks
   await extensionRunner.runHook('beforeBuild', async hook => {
-    log(`Extension(${hook.api.extId}): Running beforeBuild hook...`)
+    log(`Extension(${ hook.api.extId }): Running beforeBuild hook...`)
     await hook.fn(hook.api, { quasarConf })
   })
 
@@ -169,7 +169,7 @@ async function build () {
       ? path.join(outputFolder, '..')
       : outputFolder
 
-    banner(argv, 'build', {
+    displayBanner(argv, 'build', {
       buildOutputFolder: outputFolder,
       target: quasarConf.build.target
     })
@@ -180,7 +180,7 @@ async function build () {
 
     // run possible beforeBuild hooks
     await extensionRunner.runHook('afterBuild', async hook => {
-      log(`Extension(${hook.api.extId}): Running afterBuild hook...`)
+      log(`Extension(${ hook.api.extId }): Running afterBuild hook...`)
       await hook.fn(hook.api, { quasarConf })
     })
 
@@ -197,7 +197,7 @@ async function build () {
 
       // run possible onPublish hooks
       await extensionRunner.runHook('onPublish', async hook => {
-        log(`Extension(${hook.api.extId}): Running onPublish hook...`)
+        log(`Extension(${ hook.api.extId }): Running onPublish hook...`)
         await hook.fn(hook.api, opts)
       })
     }

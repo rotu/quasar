@@ -2,7 +2,8 @@ module.exports = {
   root: true,
 
   parserOptions: {
-    ecmaVersion: '2021' // Allows for the parsing of modern ECMAScript features
+    ecmaVersion: '2021', // Allows for the parsing of modern ECMAScript features
+    sourceType: 'module'
   },
 
   env: {

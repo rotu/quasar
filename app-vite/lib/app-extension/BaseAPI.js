@@ -32,6 +32,6 @@ export class BaseAPI {
   }
 
   __addHook (name, fn) {
-    this.__hooks[name].push({ fn, api: this })
+    this.__hooks[ name ].push({ fn, api: this })
   }
 }
