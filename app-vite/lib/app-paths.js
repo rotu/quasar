@@ -12,6 +12,10 @@ function getAppInfo () {
       return { appDir, quasarConfigFilename: 'quasar.config.js', quasarConfigFileFormat: 'module' }
     }
 
+    if (existsSync(join(appDir, 'quasar.config.mjs'))) {
+      return { appDir, quasarConfigFilename: 'quasar.config.mjs', quasarConfigFileFormat: 'module' }
+    }
+
     if (existsSync(join(appDir, 'quasar.config.ts'))) {
       return { appDir, quasarConfigFilename: 'quasar.config.ts', quasarConfigFileFormat: 'ts' }
     }
