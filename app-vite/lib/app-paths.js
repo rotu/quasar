@@ -51,6 +51,7 @@ export default {
   capacitorDir,
   electronDir,
   bexDir,
+
   quasarConfigFilename,
   quasarConfigFileFormat,
 
