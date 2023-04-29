@@ -4,24 +4,22 @@ import { normalize, resolve, join, sep } from 'node:path'
 
 import { fatal } from './helpers/logger.js'
 
+const quasarConfigFilenameList = [
+  { name: 'quasar.config.js', quasarConfigFileFormat: 'module' },
+  { name: 'quasar.config.mjs', quasarConfigFileFormat: 'module' },
+  { name: 'quasar.config.ts', quasarConfigFileFormat: 'ts' },
+  { name: 'quasar.config.cjs', quasarConfigFileFormat: 'cjs' }
+]
+
 function getAppInfo () {
   let appDir = process.cwd()
 
   while (appDir.length && appDir[ appDir.length - 1 ] !== sep) {
-    if (existsSync(join(appDir, 'quasar.config.js'))) {
-      return { appDir, quasarConfigFilename: 'quasar.config.js', quasarConfigFileFormat: 'module' }
-    }
-
-    if (existsSync(join(appDir, 'quasar.config.mjs'))) {
-      return { appDir, quasarConfigFilename: 'quasar.config.mjs', quasarConfigFileFormat: 'module' }
-    }
-
-    if (existsSync(join(appDir, 'quasar.config.ts'))) {
-      return { appDir, quasarConfigFilename: 'quasar.config.ts', quasarConfigFileFormat: 'ts' }
-    }
-
-    if (existsSync(join(appDir, 'quasar.config.cjs'))) {
-      return { appDir, quasarConfigFilename: 'quasar.config.cjs', quasarConfigFileFormat: 'commonjs' }
+    for (const { name, quasarConfigFileFormat } of quasarConfigFilenameList) {
+      const quasarConfigFilename = join(appDir, name)
+      if (existsSync(quasarConfigFilename)) {
+        return { appDir, quasarConfigFilename, quasarConfigFileFormat }
+      }
     }
 
     appDir = normalize(join(appDir, '..'))
@@ -31,6 +29,7 @@ function getAppInfo () {
 }
 
 const { appDir, quasarConfigFilename, quasarConfigFileFormat } = getAppInfo()
+
 const cliDir = new URL('..', import.meta.url).pathname
 const publicDir = resolve(appDir, 'public')
 const srcDir = resolve(appDir, 'src')
@@ -52,7 +51,7 @@ export default {
   capacitorDir,
   electronDir,
   bexDir,
-  quasarConfigFilename: resolve(appDir, quasarConfigFilename),
+  quasarConfigFilename,
   quasarConfigFileFormat,
 
   resolve: {
