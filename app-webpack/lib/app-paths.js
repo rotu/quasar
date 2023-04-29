@@ -28,6 +28,43 @@ function getAppInfo () {
   fatal(`Error. This command must be executed inside a Quasar project folder.`)
 }
 
+const postcssConfigFilenameList = [
+  'postcss.config.js',
+  'postcss.config.mjs',
+  'postcss.config.cjs',
+  '.postcssrc.js',
+  '.postcssrc.cjs',
+  '.postcssrc.mjs'
+]
+
+function getPostcssConfigFile (appDir) {
+  for (const name of postcssConfigFilenameList) {
+    const filename = join(appDir, name)
+    if (existsSync(filename)) {
+      return filename
+    }
+  }
+}
+
+const babelConfigFilenameList = [
+  'babel.config.js',
+  'babel.config.mjs',
+  'babel.config.cjs',
+  '.babelrc.js',
+  '.babelrc.mjs',
+  '.babelrc.cjs',
+  '.babelrc'
+]
+
+function getBabelConfigFile (appDir) {
+  for (const name of babelConfigFilenameList) {
+    const filename = join(appDir, name)
+    if (existsSync(filename)) {
+      return filename
+    }
+  }
+}
+
 const { appDir, quasarConfigFilename, quasarConfigFileFormat } = getAppInfo()
 
 const cliDir = new URL('..', import.meta.url).pathname
@@ -53,8 +90,8 @@ export default {
   quasarConfigFilename,
   quasarConfigFileFormat,
 
-  babelConfigFilename: resolve(appDir, 'babel.config.cjs'),
-  postcssConfigFilename: resolve(appDir, 'postcss.config.cjs'),
+  postcssConfigFilename: getPostcssConfigFile(appDir),
+  babelConfigFilename: getBabelConfigFile(appDir),
 
   resolve: {
     cli: dir => join(cliDir, dir),
