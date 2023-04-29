@@ -194,7 +194,7 @@ export async function createChain (cfg, configName) {
         .loader('babel-loader')
           .options({
             compact: false,
-            extends: appPaths.resolve.app('babel.config.cjs')
+            extends: appPaths.babelConfigFilename
           })
   }
 

@@ -49,8 +49,12 @@ export default {
   capacitorDir,
   electronDir,
   bexDir,
+
   quasarConfigFilename,
   quasarConfigFileFormat,
+
+  babelConfigFilename: resolve(appDir, 'babel.config.cjs'),
+  postcssConfigFilename: resolve(appDir, 'postcss.config.cjs'),
 
   resolve: {
     cli: dir => join(cliDir, dir),

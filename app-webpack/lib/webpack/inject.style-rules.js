@@ -6,7 +6,6 @@ import { merge } from 'webpack-merge'
 import appPaths from '../app-paths.js'
 import { cssVariables } from '../helpers/css-variables.js'
 
-const postCssConfigFile = appPaths.resolve.app('postcss.config.cjs')
 const quasarCssPaths = [
   path.join('node_modules', 'quasar', 'dist'),
   path.join('node_modules', 'quasar', 'src'),
@@ -117,7 +116,7 @@ async function injectRule (chain, pref, lang, test, loader, loaderOptions) {
 
     // need a fresh copy, otherwise plugins
     // will keep on adding making N duplicates for each one
-    const { default: postCssConfig } = await import(postCssConfigFile)
+    const { default: postCssConfig } = await import(appPaths.postcssConfigFilename)
     let postcssOptions = { sourceMap: pref.sourceMap, ...postCssConfig }
 
     if (pref.rtl) {
