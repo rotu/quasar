@@ -4,9 +4,9 @@ export function encodeForDiff (obj) {
     return typeof value === 'function'
       ? `/fn(${ value.toString() })`
       : (
-        Object.prototype.toString.call(value) === '[object RegExp]'
-          ? value.source
-          : value
+          Object.prototype.toString.call(value) === '[object RegExp]'
+            ? value.source
+            : value
         )
   })
 }

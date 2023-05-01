@@ -11,7 +11,7 @@ export function appFilesValidations (_cfg) {
   let valid = true
 
   if (existsSync(file) === false) {
-    warn(`The file /index.html is missing. Please add it back.\n`)
+    warn('The file /index.html is missing. Please add it back.\n')
     return false
   }
 

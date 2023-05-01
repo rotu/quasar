@@ -8,7 +8,7 @@ export async function getExternalIP () {
   const interfaces = await getExternalNetworkInterface()
 
   if (interfaces.length === 0) {
-    fatal(`No external IP detected. Can't run without one. Manually specify one?`)
+    fatal('No external IP detected. Can\'t run without one. Manually specify one?')
   }
 
   if (interfaces.length === 1) {

@@ -25,7 +25,7 @@ function getAppInfo () {
     appDir = normalize(join(appDir, '..'))
   }
 
-  fatal(`Error. This command must be executed inside a Quasar project folder.`)
+  fatal('Error. This command must be executed inside a Quasar project folder.')
 }
 
 const postcssConfigFilenameList = [

@@ -115,6 +115,6 @@ export function printBuildSummary (distDir, showGzipped) {
     drawHorizontalLine: index => tableIndexDelimiters.includes(index)
   })
 
-  console.log(` UI files build summary:`)
+  console.log(' UI files build summary:')
   console.log(' ' + output.replace(/\n/g, '\n '))
 }

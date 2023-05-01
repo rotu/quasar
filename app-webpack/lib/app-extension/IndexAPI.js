@@ -270,7 +270,7 @@ export class IndexAPI extends BaseAPI {
    * @param {function} fn
    *   (api, { quasarConf }) => ?Promise
    */
-  afterDev(fn) {
+  afterDev (fn) {
     this.__addHook('afterDev', fn)
   }
 

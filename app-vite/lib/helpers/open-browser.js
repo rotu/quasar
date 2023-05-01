@@ -9,7 +9,7 @@ export function openBrowser ({ url, opts, wait = true }) {
     open(url, {
       wait
     }).catch(() => {
-      warn(`Failed to open default browser`)
+      warn('Failed to open default browser')
       warn()
     })
   }
@@ -21,7 +21,7 @@ export function openBrowser ({ url, opts, wait = true }) {
       ...opts,
       wait
     }).catch(() => {
-      warn(`Failed to open specific browser`)
+      warn('Failed to open specific browser')
       warn()
       openDefault()
     })

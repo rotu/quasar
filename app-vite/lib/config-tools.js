@@ -52,7 +52,7 @@ async function parseVitePlugins (entries) {
     if (typeof name !== 'string') {
       console.log(name)
       warn('quasar.config.js > invalid Vite plugin specified: ' + name)
-      warn(`Correct form: [ 'my-vite-plugin-name', { /* opts */ } ] or [ pluginFn, { /* opts */ } ]`)
+      warn('Correct form: [ \'my-vite-plugin-name\', { /* opts */ } ] or [ pluginFn, { /* opts */ } ]')
       return
     }
 
@@ -67,7 +67,7 @@ async function parseVitePlugins (entries) {
   }
 
   if (showTip === true) {
-    tip(`If you want changes to quasar.config.js > build > vitePlugins to be picked up, specify them in this form: [ [ 'plugin-name', { /* opts */ } ], ... ] or [ [ pluginFn, { /* opts */ } ], ... ]`)
+    tip('If you want changes to quasar.config.js > build > vitePlugins to be picked up, specify them in this form: [ [ \'plugin-name\', { /* opts */ } ], ... ] or [ [ pluginFn, { /* opts */ } ], ... ]')
   }
 
   return acc
@@ -85,9 +85,9 @@ export async function createViteConfig (quasarConf, quasarRunMode) {
   const vueVitePluginOptions = quasarRunMode !== 'ssr-server'
     ? build.viteVuePluginOptions
     : merge({
-        ssr: true,
-        template: { ssr: true }
-      }, build.viteVuePluginOptions)
+      ssr: true,
+      template: { ssr: true }
+    }, build.viteVuePluginOptions)
 
   const viteConf = {
     configFile: false,

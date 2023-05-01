@@ -2,14 +2,14 @@
 import { existsSync, readFileSync } from 'node:fs'
 import webpack from 'webpack'
 import WebpackChain from 'webpack-chain'
-import CopyWebpackPlugin from 'copy-webpack-plugin'
+import { CopyWebpackPlugin } from 'copy-webpack-plugin'
 
 import appPaths from '../../app-paths.js'
 import { WebserverAssetsPlugin } from './plugin.webserver-assets.js'
 import { injectNodeTypescript } from '../inject.node-typescript.js'
 import { WebpackProgressPlugin } from '../plugin.progress.js'
 
-const nodeEnvBanner = `if(process.env.NODE_ENV===void 0){process.env.NODE_ENV='production'}`
+const nodeEnvBanner = 'if(process.env.NODE_ENV===void 0){process.env.NODE_ENV=\'production\'}'
 const prodExportFile = {
   js: appPaths.resolve.ssr('production-export.js'),
   ts: appPaths.resolve.ssr('production-export.ts'),
@@ -33,11 +33,11 @@ const flattenObject = (obj, prefix = 'process.env') => {
 }
 
 export function createSSRWebserverChain (cfg, configName) {
-  const { dependencies:appDeps = {} } = JSON.parse(
+  const { dependencies: appDeps = {} } = JSON.parse(
     readFileSync(appPaths.resolve.app('package.json'), 'utf-8')
   )
 
-  const { dependencies:cliDeps = {} } = JSON.parse(
+  const { dependencies: cliDeps = {} } = JSON.parse(
     readFileSync(appPaths.resolve.cli('package.json'), 'utf-8')
   )
 
@@ -98,7 +98,7 @@ export function createSSRWebserverChain (cfg, configName) {
   chain.module.rule('node')
     .test(/\.node$/)
     .use('node-loader')
-      .loader('node-loader')
+    .loader('node-loader')
 
   chain.resolve.modules
     .merge(resolveModules)

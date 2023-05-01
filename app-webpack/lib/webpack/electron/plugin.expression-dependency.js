@@ -5,7 +5,7 @@ export class ExpressionDependencyPlugin {
       stats.compilation.warnings = stats.compilation.warnings.filter(
         warn => !(
           warn.name === 'ModuleDependencyWarning'
-          && warn.message.includes(`the request of a dependency is an expression`)
+          && warn.message.includes('the request of a dependency is an expression')
         )
       )
     })

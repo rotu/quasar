@@ -102,8 +102,8 @@ export class AppProdBuilder extends AppBuilder {
         start: 'node index.js'
       },
       dependencies: Object.assign(appDeps, {
-        'compression': cliDeps.compression,
-        'express': cliDeps.express
+        compression: cliDeps.compression,
+        express: cliDeps.express
       }),
       engines: appPackageJson.engines,
       browserslist: appPackageJson.browserslist,

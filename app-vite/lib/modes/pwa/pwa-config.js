@@ -111,7 +111,7 @@ export const modeConfig = {
         extendInjectManifestOptions(opts)
       }
 
-      opts.swSrc = appPaths.resolve.app(`.quasar/pwa-sw/compiled-sw.js`)
+      opts.swSrc = appPaths.resolve.app('.quasar/pwa-sw/compiled-sw.js')
       opts.swDest = quasarConf.ctx.dev === true
         ? appPaths.resolve.app(`.quasar/pwa/${ quasarConf.pwa.swFilename }`)
         : join(quasarConf.build.distDir, quasarConf.pwa.swFilename)
@@ -131,7 +131,7 @@ export const modeConfig = {
     )
 
     cfg.entryPoints = [ quasarConf.sourceFiles.pwaServiceWorker ]
-    cfg.outfile = appPaths.resolve.app(`.quasar/pwa-sw/compiled-sw.js`)
+    cfg.outfile = appPaths.resolve.app('.quasar/pwa-sw/compiled-sw.js')
 
     return extendEsbuildConfig(cfg, quasarConf.pwa, 'CustomSW')
   }

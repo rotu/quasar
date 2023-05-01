@@ -9,7 +9,7 @@ import { hasTypescript } from '../helpers/has-typescript.js'
 import { bundlerIsInstalled } from '../electron/bundler.js'
 
 const electronDeps = {
-  'electron': 'latest'
+  electron: 'latest'
 }
 
 export class Mode {

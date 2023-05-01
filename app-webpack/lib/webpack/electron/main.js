@@ -21,7 +21,7 @@ export async function injectElectronMain (cfg, configName) {
       appPaths.resolve.app('.npmrc'),
       appPaths.resolve.app('package-lock.json'),
       appPaths.resolve.app('.yarnrc'),
-      appPaths.resolve.app('yarn.lock'),
+      appPaths.resolve.app('yarn.lock')
     ].map(filename => ({
       from: filename,
       to: '.',

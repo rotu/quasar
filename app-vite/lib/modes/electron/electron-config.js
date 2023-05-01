@@ -32,7 +32,7 @@ export const modeConfig = {
       ...cfg.define,
       ...parseEnv({
         QUASAR_ELECTRON_PRELOAD: quasarConf.ctx.dev === true
-          ? appPaths.resolve.app(`.quasar/electron/electron-preload.js`)
+          ? appPaths.resolve.app('.quasar/electron/electron-preload.js')
           : 'electron-preload.js',
         QUASAR_PUBLIC_FOLDER: quasarConf.ctx.dev === true
           ? appPaths.publicDir
@@ -58,7 +58,7 @@ export const modeConfig = {
       ...cfg.define,
       ...parseEnv({
         QUASAR_ELECTRON_PRELOAD: quasarConf.ctx.dev === true
-          ? appPaths.resolve.app(`.quasar/electron/electron-preload.js`)
+          ? appPaths.resolve.app('.quasar/electron/electron-preload.js')
           : 'electron-preload.js',
         QUASAR_PUBLIC_FOLDER: quasarConf.ctx.dev === true
           ? appPaths.publicDir

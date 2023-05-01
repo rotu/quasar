@@ -68,7 +68,7 @@ export async function isPortAvailable (port, host) {
         tester.once('close', () => {
           resolve(true) // found available host/port
         })
-        .close()
+          .close()
       })
       .on('error', err => {
         reject(err)

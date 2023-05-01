@@ -7,7 +7,7 @@ import { log } from './logger.js'
 import { getMode } from '../mode/index.js'
 import appPaths from '../app-paths.js'
 
-function getStoreFlagPath(storeIndexPath) {
+function getStoreFlagPath (storeIndexPath) {
   return join(parse(storeIndexPath).dir, 'store-flag.d.ts')
 }
 
@@ -28,15 +28,15 @@ export async function regenerateTypesFeatureFlags (quasarConf) {
   ]) {
     const [ isFeatureInstalled, sourceFlagPath, destFlagPath ] = feature === 'store'
       ? [
-        quasarConf.store,
-        appPaths.resolve.cli('templates/store/store-flag.d.ts'),
-        appPaths.resolve.app(getStoreFlagPath(quasarConf.sourceFiles.store))
-      ]
+          quasarConf.store,
+          appPaths.resolve.cli('templates/store/store-flag.d.ts'),
+          appPaths.resolve.app(getStoreFlagPath(quasarConf.sourceFiles.store))
+        ]
       : [
-        (await getMode(feature)).isInstalled,
-        appPaths.resolve.cli(`templates/${ feature }/${ feature }-flag.d.ts`),
-        appPaths.resolve[ feature ](`${ feature }-flag.d.ts`)
-      ]
+          (await getMode(feature)).isInstalled,
+          appPaths.resolve.cli(`templates/${ feature }/${ feature }-flag.d.ts`),
+          appPaths.resolve[ feature ](`${ feature }-flag.d.ts`)
+        ]
 
     if (isFeatureInstalled && !fs.existsSync(destFlagPath)) {
       fse.copySync(sourceFlagPath, destFlagPath)

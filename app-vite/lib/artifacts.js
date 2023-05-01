@@ -75,6 +75,6 @@ export function cleanAll () {
 
   if (fs.existsSync(distFolder)) {
     fse.emptyDirSync(distFolder)
-    log(`Emptied dist folder`)
+    log('Emptied dist folder')
   }
 }

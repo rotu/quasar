@@ -43,10 +43,10 @@ export function parseEnv (env, rawDefine) {
 const flattenObject = obj => {
   const result = {}
 
-	for (const key in obj) {
+  for (const key in obj) {
     if (!Object.prototype.hasOwnProperty.call(obj, key)) continue
 
-    if(typeof obj[ key ] !== 'object') {
+    if (typeof obj[ key ] !== 'object') {
       result[ key ] = obj[ key ]
       continue
     }
@@ -64,5 +64,5 @@ const flattenObject = obj => {
     }
   }
 
-	return result
+  return result
 }

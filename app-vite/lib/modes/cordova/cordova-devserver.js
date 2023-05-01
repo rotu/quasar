@@ -98,7 +98,7 @@ export class AppDevServer extends QuasarDevServer {
     this.#cordovaConfigFile.prepare(quasarConf)
 
     if (this.#target === 'ios' && quasarConf.cordova.noIosLegacyBuildFlag !== true) {
-      args.push(`--buildFlag=-UseModernBuildSystem=0`)
+      args.push('--buildFlag=-UseModernBuildSystem=0')
     }
 
     return new Promise(resolve => {

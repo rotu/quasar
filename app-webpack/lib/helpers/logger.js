@@ -7,7 +7,7 @@ import {
   bgYellow, yellow
 } from 'kolorist'
 
-import readline from 'readline'
+import readline from 'node:readline'
 
 /**
  * Main approach - App CLI related

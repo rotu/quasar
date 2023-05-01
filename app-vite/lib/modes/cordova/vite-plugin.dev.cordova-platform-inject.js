@@ -1,5 +1,5 @@
 
-import { static: serveStatic } from 'express'
+import { static as serveStatic } from 'express'
 
 import appPaths from '../../app-paths.js'
 import { entryPointMarkup } from '../../helpers/html-template.js'

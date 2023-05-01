@@ -36,7 +36,7 @@ export function injectSSRServer (chain, cfg) {
 
   chain.output
     .filename('render-app.js')
-    .chunkFilename(`chunk-[name].js`)
+    .chunkFilename('chunk-[name].js')
 
   chain.externals(nodeExternals({
     // do not externalize:

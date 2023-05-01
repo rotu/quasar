@@ -59,7 +59,7 @@ export class CapacitorConfig {
     )
 
     this.__updateCapPkg(cfg, this.pkg)
-    log(`Updated src-capacitor/package.json`)
+    log('Updated src-capacitor/package.json')
 
     this.tamperedFiles = []
 
@@ -188,8 +188,8 @@ export class CapacitorConfig {
       warn()
       warn()
       warn(`${ shortFilename } not found or content is unrecognized.`)
-      warn(`Your App will revoke the devserver's SSL certificate.`)
-      warn(`Please disable HTTPS from quasar.config.js > devServer > server > type: 'https'`)
+      warn('Your App will revoke the devserver\'s SSL certificate.')
+      warn('Please disable HTTPS from quasar.config.js > devServer > server > type: \'https\'')
       warn()
       warn()
       warn()
@@ -236,7 +236,7 @@ export class CapacitorConfig {
 
   __handleSSLonAndroid (add) {
     const capacitorSrcPath = appPaths.resolve.capacitor('android/app/src/main/java')
-    let mainActivityPath = fglob.sync(`**/MainActivity.java`, { cwd: capacitorSrcPath, absolute: true })
+    let mainActivityPath = fglob.sync('**/MainActivity.java', { cwd: capacitorSrcPath, absolute: true })
 
     if (mainActivityPath.length > 0) {
       if (mainActivityPath.length > 1) {

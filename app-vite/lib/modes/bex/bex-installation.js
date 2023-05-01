@@ -8,7 +8,7 @@ import { nodePackager } from '../../helpers/node-packager.js'
 import { hasTypescript } from '../../helpers/has-typescript.js'
 
 const bexDeps = {
-  'events': '^3.3.0'
+  events: '^3.3.0'
 }
 
 export function isInstalled () {
@@ -18,7 +18,7 @@ export function isInstalled () {
 export async function add (silent) {
   if (isInstalled()) {
     if (silent !== true) {
-      warn(`Browser Extension support detected already. Aborting.`)
+      warn('Browser Extension support detected already. Aborting.')
     }
     return
   }
@@ -40,7 +40,7 @@ export async function add (silent) {
     message: 'What version of manifest would you like?'
   } ])
 
-  log(`Creating Browser Extension source folder...`)
+  log('Creating Browser Extension source folder...')
 
   fse.copySync(appPaths.resolve.cli('templates/bex/common'), appPaths.bexDir)
   fse.copySync(appPaths.resolve.cli('templates/bex/bex-flag.d.ts'), appPaths.resolve.bex('bex-flag.d.ts'))
@@ -48,7 +48,7 @@ export async function add (silent) {
   const format = hasTypescript ? 'ts' : 'default'
   fse.copySync(appPaths.resolve.cli(`templates/bex/${ format }/${ answer.manifestVersion }`), appPaths.bexDir)
 
-  log(`Browser Extension support was added`)
+  log('Browser Extension support was added')
 }
 
 export function remove () {

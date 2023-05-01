@@ -2,7 +2,7 @@
 import fse from 'fs-extra'
 import { join } from 'node:path'
 
-import AppBuilder from '../../app-builder.js'
+import { AppBuilder } from '../../app-builder.js'
 import { modeConfig } from './cordova-config.js'
 
 import { fatal } from '../../helpers/logger.js'
@@ -93,7 +93,7 @@ export class AppProdBuilder extends AppBuilder {
 
   #runCordovaCommand (args, target) {
     if (target === 'ios' && this.quasarConf.cordova.noIosLegacyBuildFlag !== true) {
-      args.push(`--buildFlag=-UseModernBuildSystem=0`)
+      args.push('--buildFlag=-UseModernBuildSystem=0')
     }
 
     return new Promise(resolve => {

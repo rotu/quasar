@@ -14,11 +14,11 @@ import { WebpackProgressPlugin } from '../plugin.progress.js'
 const tempElectronDir = '.quasar/electron'
 
 export async function createNodeChain (nodeType, cfg, configName) {
-  const { dependencies:appDeps = {} } = JSON.parse(
+  const { dependencies: appDeps = {} } = JSON.parse(
     readFileSync(appPaths.resolve.app('package.json'), 'utf-8')
   )
 
-  const { dependencies:cliDeps = {} } = JSON.parse(
+  const { dependencies: cliDeps = {} } = JSON.parse(
     readFileSync(appPaths.resolve.cli('package.json'), 'utf-8')
   )
 
@@ -60,7 +60,7 @@ export async function createNodeChain (nodeType, cfg, configName) {
   chain.module.rule('node')
     .test(/\.node$/)
     .use('node-loader')
-      .loader('node-loader')
+    .loader('node-loader')
 
   chain.resolve.modules
     .merge(resolveModules)

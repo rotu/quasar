@@ -11,15 +11,15 @@ import { getPackage } from '../../helpers/get-package.js'
 const { default: importTransformation } = await getPackage('quasar/dist/transforms/import-transformation.js')
 
 function getDependenciesRegex (list) {
-  const deps = list.map(dep => {
+  const deps = list.map(dep => { // eslint-disable-line array-callback-return
     if (typeof dep === 'string') {
       return path.join('node_modules', dep, '/')
         .replace(/\\/g, '[\\\\/]') // windows support
     }
-    else if (dep instanceof RegExp) {
+    if (dep instanceof RegExp) {
       return dep.source
     }
-  })
+  }).filter(e => e)
 
   return new RegExp(deps.join('|'))
 }
@@ -71,8 +71,8 @@ export function createCustomSw (cfg, configName) {
   chain.module.rule('js-transform-quasar-imports')
     .test(/\.(t|j)sx?$/)
     .use('transform-quasar-imports')
-      .loader(new URL('../loader.js.transform-quasar-imports.cjs', import.meta.url).pathname)
-      .options({ importTransformation })
+    .loader(new URL('../loader.js.transform-quasar-imports.cjs', import.meta.url).pathname)
+    .options({ importTransformation })
 
   if (cfg.build.transpile === true) {
     const nodeModulesRegex = /[\\/]node_modules[\\/]/
@@ -84,19 +84,19 @@ export function createCustomSw (cfg, configName) {
     chain.module.rule('babel')
       .test(/\.js$/)
       .exclude
-        .add(filepath => (
-          // Transpile the exceptions:
-          exceptionsRegex.test(filepath) === false
+      .add(filepath => (
+        // Transpile the exceptions:
+        exceptionsRegex.test(filepath) === false
           // Don't transpile anything else in node_modules:
           && nodeModulesRegex.test(filepath)
-        ))
-        .end()
+      ))
+      .end()
       .use('babel-loader')
-        .loader('babel-loader')
-          .options({
-            compact: false,
-            extends: appPaths.babelConfigFilename
-          })
+      .loader('babel-loader')
+      .options({
+        compact: false,
+        extends: appPaths.babelConfigFilename
+      })
   }
 
   if (cfg.supportTS !== false) {
@@ -107,16 +107,16 @@ export function createCustomSw (cfg, configName) {
       .rule('typescript')
       .test(/\.ts$/)
       .use('ts-loader')
-        .loader('ts-loader')
-        .options({
-          onlyCompileBundledFiles: true,
-          transpileOnly: false,
-          // While `noEmit: true` is needed in the tsconfig preset to prevent VSCode errors,
-          // it prevents emitting transpiled files when run into node context
-          compilerOptions: {
-            noEmit: false,
-          }
-        })
+      .loader('ts-loader')
+      .options({
+        onlyCompileBundledFiles: true,
+        transpileOnly: false,
+        // While `noEmit: true` is needed in the tsconfig preset to prevent VSCode errors,
+        // it prevents emitting transpiled files when run into node context
+        compilerOptions: {
+          noEmit: false
+        }
+      })
   }
 
   chain.module // fixes https://github.com/graphql/graphql-js/issues/1272
@@ -124,7 +124,7 @@ export function createCustomSw (cfg, configName) {
     .test(/\.mjs$/)
     .type('javascript/auto')
     .include
-      .add(/[\\/]node_modules[\\/]/)
+    .add(/[\\/]node_modules[\\/]/)
 
   chain.plugin('define')
     .use(webpack.DefinePlugin, [

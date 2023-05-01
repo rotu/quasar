@@ -22,7 +22,7 @@ export function uniqueBy (arr, fn) {
 /**
  * Removes the bloat around the filename (webpack loaders etc)
  */
- export function removeFileLoaders (file) {
+export function removeFileLoaders (file) {
   if (!file) { return '' }
 
   const split = file.split('!')

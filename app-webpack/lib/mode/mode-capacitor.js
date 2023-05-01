@@ -15,7 +15,7 @@ export class Mode {
 
   async add (target) {
     if (this.isInstalled) {
-      warn(`Capacitor support detected already. Aborting.`)
+      warn('Capacitor support detected already. Aborting.')
       return
     }
 
@@ -27,8 +27,8 @@ export class Mode {
 
     if (/^[0-9]/.test(appName)) {
       warn(
-        `App product name cannot start with a number. `
-        + `Please change the "productName" prop in your /package.json then try again.`
+        'App product name cannot start with a number. '
+        + 'Please change the "productName" prop in your /package.json then try again.'
       )
       return
     }
@@ -44,7 +44,7 @@ export class Mode {
       validate: appId => (appId ? true : 'Please fill in a value')
     } ])
 
-    log(`Creating Capacitor source folder...`)
+    log('Creating Capacitor source folder...')
 
     // Create /src-capacitor from template
     fse.ensureDirSync(appPaths.capacitorDir)
@@ -70,7 +70,7 @@ export class Mode {
 
     const { capBin } = await import('../capacitor/cap-cli.js')
 
-    log(`Initializing capacitor...`)
+    log('Initializing capacitor...')
     spawnSync(
       capBin,
       [
@@ -83,11 +83,11 @@ export class Mode {
       { cwd: appPaths.capacitorDir }
     )
 
-    log(`Capacitor support was added`)
+    log('Capacitor support was added')
 
     if (!target) {
       console.log()
-      console.log(` No Capacitor platform has been added yet as these get installed on demand automatically when running "quasar dev" or "quasar build".`)
+      console.log(' No Capacitor platform has been added yet as these get installed on demand automatically when running "quasar dev" or "quasar build".')
       log()
       return
     }
@@ -123,15 +123,15 @@ export class Mode {
     )
   }
 
-  remove() {
+  remove () {
     if (!this.isInstalled) {
-      warn(`No Capacitor support detected. Aborting.`)
+      warn('No Capacitor support detected. Aborting.')
       return
     }
 
-    log(`Removing Capacitor folder`)
+    log('Removing Capacitor folder')
     fse.removeSync(appPaths.capacitorDir)
 
-    log(`Capacitor support was removed`)
+    log('Capacitor support was removed')
   }
 }

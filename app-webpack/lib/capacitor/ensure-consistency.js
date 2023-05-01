@@ -25,7 +25,7 @@ export function ensureDeps () {
 
   nodePackager.install({
     cwd: appPaths.capacitorDir,
-    displayName: 'Capacitor',
+    displayName: 'Capacitor'
   })
 }
 

@@ -44,7 +44,10 @@ if (cmd) {
   }
   else {
     if (cmd === '-v' || cmd === '--version') {
-      console.log(version)
+      console.log(
+        `@quasar/app-vite ${ version }`
+        + (process.env.QUASAR_CLI_VERSION ? ` (@quasar/cli ${ process.env.QUASAR_CLI_VERSION })` : '')
+      )
       process.exit(0)
     }
 
@@ -52,7 +55,7 @@ if (cmd) {
       cmd = 'help'
     }
     else if (cmd.indexOf('-') === 0) {
-      warn(`Command must come before the options`)
+      warn('Command must come before the options')
       cmd = 'help'
     }
     else {

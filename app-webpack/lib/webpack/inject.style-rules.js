@@ -137,9 +137,9 @@ async function injectRule (chain, pref, lang, test, loader, loaderOptions) {
             typeof postcssRTLOptions === 'function'
               ? postcssRTLOptions(isClientCSS, ctx.resourcePath)
               : {
-                ...postcssRTLOptions,
-                source: isClientCSS ? 'rtl' : 'ltr'
-              }
+                  ...postcssRTLOptions,
+                  source: isClientCSS ? 'rtl' : 'ltr'
+                }
           ))
 
           return { sourceMap: pref.sourceMap, plugins }

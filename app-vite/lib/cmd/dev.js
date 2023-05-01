@@ -94,7 +94,7 @@ async function startVueDevtools () {
   let vueDevtoolsBin = getPackagePath('@vue/devtools/bin.js')
 
   function run () {
-    log(`Booting up remote Vue Devtools...`)
+    log('Booting up remote Vue Devtools...')
     spawn(vueDevtoolsBin, [], {})
   }
 

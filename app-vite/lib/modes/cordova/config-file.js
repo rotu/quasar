@@ -74,7 +74,7 @@ export class CordovaConfigFile {
     }
 
     // needed for QResizeObserver until ResizeObserver Web API is supported by all platforms
-    if (!root.find(`allow-navigation[@href='about:*']`)) {
+    if (!root.find('allow-navigation[@href=\'about:*\']')) {
       et.SubElement(root, 'allow-navigation', { href: 'about:*' })
     }
 
@@ -126,9 +126,9 @@ export class CordovaConfigFile {
       warn()
       warn()
       warn()
-      warn(`AppDelegate.m not found. Your App will revoke the devserver's SSL certificate.`)
-      warn(`Please report the cordova CLI version and cordova-ios package that you are using.`)
-      warn(`Also, disable HTTPS from quasar.config.js > devServer > server > type: 'https'`)
+      warn('AppDelegate.m not found. Your App will revoke the devserver\'s SSL certificate.')
+      warn('Please report the cordova CLI version and cordova-ios package that you are using.')
+      warn('Also, disable HTTPS from quasar.config.js > devServer > server > type: \'https\'')
       warn()
       warn()
       warn()

@@ -8,7 +8,7 @@ import {
   underline
 } from 'kolorist'
 
-import readline from 'readline'
+import readline from 'node:readline'
 
 /**
  * Pills
@@ -29,7 +29,6 @@ const greenBanner = green(banner)
 const redBanner = red(banner)
 const yellowBanner = yellow(banner)
 const tipBanner = `${ green('App') } ${ dot } ${ successPill('TIP') } ${ dot } 🚀 `
-
 
 export const clearConsole = process.stdout.isTTY
   ? () => {

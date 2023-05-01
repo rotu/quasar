@@ -29,7 +29,7 @@ export const cssVariables = {
 
       return ext !== false
         ? `@import '~src/css/quasar.variables.${ ext }', 'quasar/src/css/variables.sass';\n`
-        : `@import 'quasar/src/css/variables.sass';\n`
+        : '@import \'quasar/src/css/variables.sass\';\n'
     })(),
 
     sass: (() => {
@@ -39,7 +39,7 @@ export const cssVariables = {
 
       return ext !== false
         ? `@import '~src/css/quasar.variables.${ ext }', 'quasar/src/css/variables.sass'\n`
-        : `@import 'quasar/src/css/variables.sass'\n`
+        : '@import \'quasar/src/css/variables.sass\'\n'
     })()
   }
 }

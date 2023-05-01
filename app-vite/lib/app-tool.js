@@ -66,7 +66,7 @@ export class AppTool {
     const esbuildCtx = await esbuild.context(esbuildConfig)
     await esbuildCtx.watch()
 
-    return new Promise(res => {
+    return new Promise(res => { // eslint-disable-line promise/param-names
       resolve = () => {
         res(esbuildCtx)
       }
