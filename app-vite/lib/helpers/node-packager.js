@@ -37,6 +37,10 @@ class PackageManager {
     return []
   }
 
+  getPackageVersionList (_packageName) {
+    return null
+  }
+
   /**
    * Implementation of the actual package manager
    */
