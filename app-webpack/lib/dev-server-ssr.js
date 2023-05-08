@@ -7,6 +7,7 @@ import chokidar from 'chokidar'
 
 import express from 'express'
 import createRenderer from '@quasar/ssr-helpers/create-renderer.js'
+import renderSSRError from '@quasar/render-ssr-error'
 
 import { getClientManifest } from './webpack/ssr/plugin.client-side.js'
 import { getServerManifest } from './webpack/ssr/plugin.server-side.js'
@@ -16,20 +17,20 @@ import { webpackNames } from './webpack/symbols.js'
 import appPaths from './app-paths.js'
 import { getPackage } from './helpers/get-package.js'
 import { openBrowser } from './helpers/open-browser.js'
-import { getOuchInstance } from './helpers/cli-error-handling.js'
 
 import { getIndexHtml } from './ssr/html-template.js'
 
-const ouchInstance = await getOuchInstance()
 const { renderToString } = await getPackage('@vue/server-renderer')
 
 const banner = '[Quasar Dev Webserver]'
 const compiledMiddlewareFile = appPaths.resolve.app('.quasar/ssr/compiled-middlewares.mjs')
+
 const renderError = ({ err, req, res }) => {
-  ouchInstance.handleException(err, req, res, () => {
-    console.error(`${ banner } ${ req.url } -> error during render`)
-    console.error(err.stack)
-  })
+  console.log()
+  console.error(`${ banner } ${ req.url } -> error during render`)
+  console.error(err.stack)
+
+  renderSSRError({ err, req, res })
 }
 
 const doubleSlashRE = /\/\//g

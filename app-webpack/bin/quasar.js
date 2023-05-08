@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 import '../lib/node-version-check.js'
-import '../lib/helpers/cli-error-handling.js'
 
 import { version } from '../lib/version.js'
 import { log, warn } from '../lib/helpers/logger.js'

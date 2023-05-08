@@ -49,6 +49,7 @@
   "dependencies": {
     "@quasar/fastclick": "1.1.5",
     "@quasar/vite-plugin": "/Users/razvan/work/v3/vite-plugin",
+    "@quasar/render-ssr-error": "^1.0.0",
     "@rollup/pluginutils": "^4.1.2",
     "@types/chrome": "^0.0.210",
     "@types/compression": "^1.7.2",
@@ -73,7 +74,6 @@
     "lodash": "^4.17.21",
     "minimist": "^1.2.6",
     "open": "^8.4.0",
-    "ouch": "^2.0.0",
     "register-service-worker": "^1.7.2",
     "rollup-plugin-visualizer": "^5.5.4",
     "sass": "1.32.12",
